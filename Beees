@@ -1,3409 +1,1137 @@
--- Behaviour trace of a Unknown obfuscator script
--- NOTE: reconstructed from observed behaviour; branches that were not taken
---       during the trace are missing and conditions are only noted in comments.
--- run status: finished
--- 3464 statements recorded in 0.31s
--- remotes fired/invoked:
+-- KronHub rebuild for Bee Swarm Simulator
+-- Working farming loop: field walking, continuous clicking, near-only token
+-- collection, hive conversion. Uses the remotes confirmed from the hub trace:
 --   ReplicatedStorage.Events.ClaimHive
---   ReplicatedStorage.Events.PlayerActivesCommand
---   ReplicatedStorage.Events.ToyEvent
+--   ReplicatedStorage.Events.PlayerActivesCommand  {Name = ...}
+--   ReplicatedStorage.Events.ToyEvent              "Dispenser name"
+--   ReplicatedStorage.Events.PlayerHiveCommand     "ToggleHoneyMaking"
 
--- [deobf] folded 0 repeated calls into 0 helper functions and 28 unrolled runs into loops
-wait()
-game.Players.localPlayer:IsInGroup(14163561)
-game.CoreGui:FindFirstChild("KronHub")
-game.CoreGui.KronHub:Destroy()
 local Players = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-game.Players.LocalPlayer:GetMouse()
-local NotifyGui = Instance.new("ScreenGui")
-local NotifyHolder = Instance.new("Frame")
-local UIPadding = Instance.new("UIPadding")
-local UIListLayout = Instance.new("UIListLayout")
-NotifyGui.Name = "NotifyGui"
-local CoreGui = game:GetService("CoreGui")
-NotifyGui.Parent = CoreGui
-NotifyGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-NotifyHolder.Name = "NotifyHolder"
-NotifyHolder.Parent = NotifyGui
-NotifyHolder.AnchorPoint = Vector2.new(0.5, 0.5)
-NotifyHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-NotifyHolder.BackgroundTransparency = 1
-NotifyHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
-NotifyHolder.BorderSizePixel = 0
-NotifyHolder.Position = UDim2.new(0.936999977, 0, 0.879999995, 0)
-NotifyHolder.Size = UDim2.new(0, 168, 0, 229)
-UIPadding.Parent = NotifyHolder
-UIPadding.PaddingTop = UDim.new(0, 5)
-UIListLayout.Parent = NotifyHolder
-UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
-UIListLayout.Padding = UDim.new(0, 5)
-task.wait()
-game:IsLoaded()
-local KronHub = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local MainC = Instance.new("UICorner")
-local shadowHolder = Instance.new("Frame")
-local umbraShadow = Instance.new("ImageLabel")
-local penumbraShadow = Instance.new("ImageLabel")
-local ambientShadow = Instance.new("ImageLabel")
-local Bar = Instance.new("Frame")
-local BarC = Instance.new("UICorner")
-local BarBackgorund = Instance.new("Frame")
-local ButtonsHolder = Instance.new("ScrollingFrame")
-local UIListLayout2 = Instance.new("UIListLayout")
-local Icon = Instance.new("ImageLabel")
-local Line = Instance.new("Frame")
-local Liner = Instance.new("Frame")
-local Tabs = Instance.new("Frame")
-local TabName = Instance.new("Frame")
-local UICorner3 = Instance.new("UICorner")
-KronHub.Name = "KronHub"
-KronHub.Parent = game.CoreGui
-Main.Name = "Main"
-Main.Parent = KronHub
-Main.AnchorPoint = Vector2.new(0.5, 0.5)
-Main.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.fromOffset(0, -50)
-Main.Size = UDim2.new(0, 554, 0, 339)
-MainC.CornerRadius = UDim.new(0, 5)
-MainC.Name = "MainC"
-MainC.Parent = Main
-shadowHolder.Name = "shadowHolder"
-shadowHolder.Parent = Main
-shadowHolder.BackgroundTransparency = 1
-shadowHolder.Position = UDim2.new(-0.0119124316, 0, -0.0211184341, 0)
-shadowHolder.Size = UDim2.new(1.02499998, 0, 1.03499997, 0)
-shadowHolder.ZIndex = 0
-
-for _, item in ipairs({
-	{ imageLabel = umbraShadow, name = "umbraShadow", imageTransparency = 0.86 },
-	{ imageLabel = penumbraShadow, name = "penumbraShadow", imageTransparency = 0.88 },
-	{ imageLabel = ambientShadow, name = "ambientShadow", imageTransparency = 0.88 },
-}) do
-	item.imageLabel.Name = item.name
-	item.imageLabel.Parent = shadowHolder
-	item.imageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-	item.imageLabel.BackgroundTransparency = 1
-	item.imageLabel.Position = UDim2.new(0.5, 0, 0.5, 2)
-	item.imageLabel.Size = UDim2.new(1, 4, 1, 4)
-	item.imageLabel.ZIndex = 0
-	item.imageLabel.Image = "rbxassetid://1316045217"
-	item.imageLabel.ImageColor3 = Color3.fromRGB(0, 0, 0)
-	item.imageLabel.ImageTransparency = item.imageTransparency
-	item.imageLabel.ScaleType = Enum.ScaleType.Slice
-	item.imageLabel.SliceCenter = Rect.new(10, 10, 118, 118)
-end
-
-Bar.Name = "Bar"
-Bar.Parent = Main
-Bar.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Bar.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Bar.BorderSizePixel = 0
-Bar.Position = UDim2.new(1.10171761e-07, 0, 0, 0)
-Bar.Size = UDim2.new(0, 11, 0, 339)
-BarC.CornerRadius = UDim.new(0, 5)
-BarC.Name = "BarC"
-BarC.Parent = Bar
-BarBackgorund.Name = "BarBackgorund"
-BarBackgorund.Parent = Bar
-BarBackgorund.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BarBackgorund.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BarBackgorund.BorderSizePixel = 0
-BarBackgorund.Position = UDim2.new(0.9, 0, 0, 0)
-BarBackgorund.Size = UDim2.new(0, 116, 0, 339)
-ButtonsHolder.Name = "ButtonsHolder"
-ButtonsHolder.Parent = BarBackgorund
-ButtonsHolder.Active = true
-ButtonsHolder.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-ButtonsHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ButtonsHolder.BorderSizePixel = 0
-ButtonsHolder.Position = UDim2.new(0, 0, 0.291584581, 0)
-ButtonsHolder.Size = UDim2.new(0, 114, 0, 238)
-ButtonsHolder.CanvasSize = UDim2.new(0, 0, 0, 0)
-ButtonsHolder.ScrollBarThickness = 0
-UIListLayout2.Parent = ButtonsHolder
-UIListLayout2.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout2.Padding = UDim.new(0, 10)
-Icon.Name = "Icon"
-Icon.Parent = BarBackgorund
-Icon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Icon.BackgroundTransparency = 1
-Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Icon.BorderSizePixel = 0
-Icon.Position = UDim2.new(-0.10576915, 0, 0.0265486725, 0)
-Icon.Size = UDim2.new(0, 127, 0, 71)
-Icon.Image = "rbxassetid://91615486582153"
-Line.Name = "Line"
-Line.Parent = BarBackgorund
-Line.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Line.BorderSizePixel = 0
-Line.Position = UDim2.new(0, 0, 0.260314047, 0)
-Line.Size = UDim2.new(0, 107, 0, -2)
-Liner.Name = "Liner"
-Liner.Parent = Bar
-Liner.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Liner.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Liner.BorderSizePixel = 0
-Liner.Position = UDim2.new(0.549998879, 0, 0, 0)
-Liner.Size = UDim2.new(0, 40, 0, 4)
-Tabs.Name = "Tabs"
-Tabs.Parent = Main
-Tabs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Tabs.BackgroundTransparency = 1
-Tabs.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Tabs.BorderSizePixel = 0
-Tabs.Position = UDim2.new(0.227436826, 0, 0.0265486725, 0)
-Tabs.Size = UDim2.new(0, 428, 0, 320)
-TabName.Name = "TabName"
-TabName.Parent = Tabs
-TabName.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-TabName.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TabName.BorderSizePixel = 0
-TabName.Position = UDim2.new(0.0189999994, 0, 0, 0)
-TabName.Size = UDim2.new(0, 413, 0, 320)
-UICorner3.CornerRadius = UDim.new(0, 5)
-UICorner3.Parent = TabName
-
-BarBackgorund.InputBegan:Connect(function(input, gameProcessed)
-end)
-
-BarBackgorund.InputChanged:Connect(function(input2, gameProcessed2)
-end)
-
-UserInputService.InputChanged:Connect(function(input3, gameProcessed3)
-end)
-
-local changedSignal = UIListLayout2:GetPropertyChangedSignal("AbsoluteContentSize")
-
-changedSignal:Connect(function()
-	ButtonsHolder.CanvasSize = UDim2.new(0, 0, 0, 0)
-end)
-
-getgenv().AutoDig = false
-getgenv().AutoFarm = false
-getgenv().CollectTokens = false
-getgenv().collectbubble = false
-getgenv().placesprinkler = false
-getgenv().convertballon = false
-getgenv().TrainSnail = false
-getgenv().Speed = 16
-getgenv().AutoFarmSpeed = false
-local children = workspace.Honeycombs:GetChildren()
-
-for k, v in pairs(children) do
-	v:FindFirstChild("patharrow")
-	v.patharrow:FindFirstChild("Base")
-	v:FindFirstChild("HiveID")
-	v:FindFirstChild("Owner")
-end
-
-local children2 = workspace.Honeycombs:GetChildren()
-
-for k2, v2 in pairs(children2) do
-	v2:FindFirstChild("patharrow")
-	v2.patharrow:FindFirstChild("Base")
-	v2:FindFirstChild("HiveID")
-	v2:FindFirstChild("Owner")
-end
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-ReplicatedStorage.Events.ClaimHive:FireServer(nil)
+local UserInputService = game:GetService("UserInputService")
+local VirtualUser = game:GetService("VirtualUser")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local TeleportService = game:GetService("TeleportService")
+local CoreGui = game:GetService("CoreGui")
 
-game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
-	character:WaitForChild("Humanoid")
-	character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
-	character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
-end)
+local player = Players.LocalPlayer
 
-game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
-game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
-game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
-game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
-local combatcrabpart = Instance.new("Part", workspace)
-combatcrabpart.Name = "combatcrabpart"
-combatcrabpart.Anchored = true
-combatcrabpart.Transparency = 1
-combatcrabpart.Size = Vector3.new(90, 1, 90)
-combatcrabpart.Position = Vector3.new(-257.52117919921875, 105.91863250732422, 457.867919921875)
-local Icon2 = Instance.new("ImageLabel")
-local TextButton = Instance.new("TextButton")
-local TextLabel = Instance.new("TextLabel")
-local Home = Instance.new("ScrollingFrame")
-local UIPadding2 = Instance.new("UIPadding")
-local UIListLayout3 = Instance.new("UIListLayout")
-Icon2.Name = "Icon"
-Icon2.Parent = ButtonsHolder
-Icon2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Icon2.BackgroundTransparency = 1
-Icon2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Icon2.BorderSizePixel = 0
-Icon2.Size = UDim2.new(0, 20, 0, 20)
-Icon2.Image = "rbxassetid://6035145364"
-Icon2.ImageColor3 = Color3.fromRGB(200, 200, 200)
-TextButton.Parent = Icon2
-TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.BackgroundTransparency = 1
-TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Size = UDim2.new(0, 115, 0, 20)
-TextButton.AutoButtonColor = false
-TextButton.Font = Enum.Font.SourceSans
-TextButton.Text = ""
-TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextSize = 14
-TextButton.TextTransparency = 1
-TextLabel.Parent = Icon2
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(1.40379024, 0, 0, 0)
-TextLabel.Size = UDim2.new(0, 85, 0, 20)
-TextLabel.Font = Enum.Font.SourceSansBold
-TextLabel.Text = "Home"
-TextLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-TextLabel.TextSize = 14
-TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-Home.Name = "Home"
-Home.Parent = TabName
-Home.Active = true
-Home.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Home.BackgroundTransparency = 1
-Home.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Home.BorderSizePixel = 0
-Home.Size = UDim2.new(0, 413, 0, 320)
-Home.Visible = false
-Home.ScrollBarThickness = 2
-UIPadding2.Parent = Home
-UIPadding2.PaddingTop = UDim.new(0, 5)
-UIListLayout3.Parent = Home
-UIListLayout3.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout3.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout3.Padding = UDim.new(0, 6)
-local changedSignal2 = UIListLayout3:GetPropertyChangedSignal("AbsoluteContentSize")
+local CONFIG = {
+	field = "Sunflower",
+	autoFarm = false,
+	collectTokens = true,
+	autoConvert = true,
+	tokenMode = "Walk", -- "Walk" or "Teleport"
+	tokenRadius = 55, -- only tokens this close are taken, never a cross-map token
+	tickDelay = 0.05,
+	clickDelay = 0.08,
+	swingDelay = 0.10,
+	stepDistance = 32,
+	arriveRadius = 8,
+	ringPoints = 12,
+	waypointTimeout = 4,
+	convertAt = 0.9,
+	convertFallback = 150,
+	convertTimeout = 45,
+}
 
-changedSignal2:Connect(function()
-	Home.CanvasSize = UDim2.new(0, 0, 0, 8)
-end)
+local FIELD_NAMES = {
+	"Sunflower", "Dandelion", "Mushroom", "Blue_Flower", "Clover", "Spider",
+	"Strawberry", "Bamboo", "Pineapple", "Stump", "Pumpkin", "Cactus",
+	"Rose", "PineTreeForest", "Mountain", "Coconut", "Pepper",
+}
 
-TextButton.MouseEnter:Connect(function()
-end)
+local BUFFS = {
+	"Blue Extract", "Red Extract", "Glitter", "Glue", "Oil", "Enzymes",
+	"Tropical Drink", "Purple Potion", "Super Smoothie", "Marshmallow Bee",
+}
 
-TextButton.MouseLeave:Connect(function()
-end)
+local DISPENSERS = {
+	"Glue Dispenser", "Wealth Clock", "Coconut Dispenser", "Strawberry Dispenser",
+	"Treat Dispenser", "Free Ant Pass Dispenser", "Blueberry Dispenser",
+	"Honey Dispenser", "Free Royal Jelly Dispenser",
+}
 
-UserInputService.InputBegan:Connect(function(input4, gameProcessed4)
-end)
+local COLORS = {
+	main = Color3.fromRGB(39, 39, 47),
+	panel = Color3.fromRGB(29, 29, 35),
+	row = Color3.fromRGB(22, 22, 27),
+	accent = Color3.fromRGB(0, 106, 255),
+	on = Color3.fromRGB(0, 106, 255),
+	text = Color3.fromRGB(255, 255, 255),
+	dim = Color3.fromRGB(185, 185, 195),
+}
 
-local tween = TweenService:Create(TextLabel, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(0, 106, 255) })
+local state = {
+	alive = true,
+	fields = {},
+	ring = 0,
+	waypointAt = os.clock(),
+	moveAt = 0,
+	lastClick = 0,
+	lastSwing = 0,
+	lastConvert = os.clock(),
+	tokens = 0,
+	converting = false,
+	tokenTarget = nil,
+	tokenSince = 0,
+	hiveOverride = nil,
+}
 
-tween.Completed:Connect(function(playbackState)
-end)
+local tokenCooldowns = setmetatable({}, { __mode = "k" })
+local gui = { fieldDisplays = {}, status = nil }
+local connections = {}
 
-tween:Play()
-local tween2 = TweenService:Create(Icon2, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(0, 106, 255) })
-
-tween2.Completed:Connect(function(playbackState2)
-end)
-
-tween2:Play()
-Home.Visible = true
-local Section = Instance.new("TextLabel")
-local TextLiner = Instance.new("Frame")
-Section.Name = "Section"
-Section.Parent = Home
-Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section.BackgroundTransparency = 1
-Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section.BorderSizePixel = 0
-Section.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section.Size = UDim2.new(0, 381, 0, 18)
-Section.Font = Enum.Font.SourceSansBold
-Section.Text = "Credits"
-Section.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section.TextSize = 14
-Section.TextWrapped = true
-Section.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner.Name = "TextLiner"
-TextLiner.Parent = Section
-TextLiner.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner.BorderSizePixel = 0
-TextLiner.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner.Size = UDim2.new(0, 44, 0, 2)
-
-for _, text in ipairs({
-	"Owner - .Kron", "Version - 1.0",
-}) do
-	local TextBox4 = Instance.new("TextLabel")
-	local UICorner4 = Instance.new("UICorner")
-	TextBox4.Name = "TextBox"
-	TextBox4.Parent = Home
-	TextBox4.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-	TextBox4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TextBox4.BorderSizePixel = 0
-	TextBox4.Position = UDim2.new(0.0314769968, 0, 0.0761904791, 0)
-	TextBox4.Size = UDim2.new(0, 387, 0, 24)
-	TextBox4.Font = Enum.Font.SourceSansBold
-	TextBox4.Text = text
-	TextBox4.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TextBox4.TextSize = 14
-	TextBox4.TextWrapped = true
-	UICorner4.CornerRadius = UDim.new(0, 3)
-	UICorner4.Parent = TextBox4
+local function track(connection)
+	table.insert(connections, connection)
+	return connection
 end
 
-local Section2 = Instance.new("TextLabel")
-local TextLiner2 = Instance.new("Frame")
-Section2.Name = "Section"
-Section2.Parent = Home
-Section2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section2.BackgroundTransparency = 1
-Section2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section2.BorderSizePixel = 0
-Section2.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section2.Size = UDim2.new(0, 381, 0, 18)
-Section2.Font = Enum.Font.SourceSansBold
-Section2.Text = "Settings"
-Section2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section2.TextSize = 14
-Section2.TextWrapped = true
-Section2.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner2.Name = "TextLiner"
-TextLiner2.Parent = Section2
-TextLiner2.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner2.BorderSizePixel = 0
-TextLiner2.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner2.Size = UDim2.new(0, 44, 0, 2)
-local TextButton2 = Instance.new("TextButton")
-local UICorner6 = Instance.new("UICorner")
-TextButton2.Parent = Home
-TextButton2.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-TextButton2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton2.BorderSizePixel = 0
-TextButton2.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-TextButton2.Size = UDim2.new(0, 387, 0, 33)
-TextButton2.AutoButtonColor = false
-TextButton2.Font = Enum.Font.SourceSansBold
-TextButton2.Text = "Rejoin Server"
-TextButton2.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton2.TextSize = 14
-UICorner6.CornerRadius = UDim.new(0, 3)
-UICorner6.Parent = TextButton2
-
-TextButton2.MouseButton1Click:Connect(function()
-	local tween10 = TweenService:Create(TextButton2, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(0, 106, 255) })
-
-	tween10.Completed:Connect(function(playbackState3)
-	end)
-
-	tween10:Play()
-	task.wait(0.1)
-	local tween11 = TweenService:Create(TextButton2, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(22, 22, 27) })
-
-	tween11.Completed:Connect(function(playbackState4)
-	end)
-
-	tween11:Play()
-	local TeleportService = game:GetService("TeleportService")
-	TeleportService:Teleport(0, Players.LocalPlayer)
-end)
-
-local Section3 = Instance.new("TextLabel")
-local TextLiner3 = Instance.new("Frame")
-Section3.Name = "Section"
-Section3.Parent = Home
-Section3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section3.BackgroundTransparency = 1
-Section3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section3.BorderSizePixel = 0
-Section3.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section3.Size = UDim2.new(0, 381, 0, 18)
-Section3.Font = Enum.Font.SourceSansBold
-Section3.Text = "Discord"
-Section3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section3.TextSize = 14
-Section3.TextWrapped = true
-Section3.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner3.Name = "TextLiner"
-TextLiner3.Parent = Section3
-TextLiner3.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner3.BorderSizePixel = 0
-TextLiner3.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner3.Size = UDim2.new(0, 44, 0, 2)
-local TextButton3 = Instance.new("TextButton")
-local UICorner7 = Instance.new("UICorner")
-TextButton3.Parent = Home
-TextButton3.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-TextButton3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton3.BorderSizePixel = 0
-TextButton3.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-TextButton3.Size = UDim2.new(0, 387, 0, 33)
-TextButton3.AutoButtonColor = false
-TextButton3.Font = Enum.Font.SourceSansBold
-TextButton3.Text = "Copy Discord Server"
-TextButton3.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton3.TextSize = 14
-UICorner7.CornerRadius = UDim.new(0, 3)
-UICorner7.Parent = TextButton3
-
-TextButton3.MouseButton1Click:Connect(function()
-	local tween12 = TweenService:Create(TextButton3, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(0, 106, 255) })
-
-	tween12.Completed:Connect(function(playbackState5)
-	end)
-
-	tween12:Play()
-	task.wait(0.1)
-	local tween13 = TweenService:Create(TextButton3, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(22, 22, 27) })
-
-	tween13.Completed:Connect(function(playbackState6)
-	end)
-
-	tween13:Play()
-	setclipboard("https://discord.gg/QKFNzKyHbw")
-
-	task.spawn(function()
-		local Frame44 = Instance.new("Frame")
-		local MainC2 = Instance.new("UICorner")
-		local TextLabel35 = Instance.new("TextLabel")
-		local UIPadding11 = Instance.new("UIPadding")
-		local TextLabel36 = Instance.new("TextLabel")
-		Frame44.Parent = NotifyHolder
-		Frame44.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-		Frame44.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		Frame44.BorderSizePixel = 0
-		Frame44.BackgroundTransparency = 1
-		Frame44.Position = UDim2.new(-0.0432128906, 0, 0.8125, 0)
-		Frame44.Size = UDim2.new(0, 218, 0, 42)
-		MainC2.CornerRadius = UDim.new(0, 5)
-		MainC2.Name = "MainC"
-		MainC2.Parent = Frame44
-		TextLabel35.Parent = Frame44
-		TextLabel35.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel35.BackgroundTransparency = 1
-		TextLabel35.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextLabel35.BorderSizePixel = 0
-		TextLabel35.Size = UDim2.new(0, 186, 0, 24)
-		TextLabel35.Font = Enum.Font.SourceSansBold
-		TextLabel35.Text = "KronHub"
-		TextLabel35.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel35.TextSize = 14
-		TextLabel35.TextTransparency = 1
-		TextLabel35.TextWrapped = true
-		TextLabel35.TextXAlignment = Enum.TextXAlignment.Left
-		UIPadding11.Parent = Frame44
-		UIPadding11.PaddingLeft = UDim.new(0, 10)
-		TextLabel36.Parent = Frame44
-		TextLabel36.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel36.BackgroundTransparency = 1
-		TextLabel36.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		TextLabel36.BorderSizePixel = 0
-		TextLabel36.Position = UDim2.new(0, 0, 0.428571433, 0)
-		TextLabel36.Size = UDim2.new(0, 186, 0, 24)
-		TextLabel36.Font = Enum.Font.SourceSans
-		TextLabel36.Text = "Discord Server Copied"
-		TextLabel36.TextTransparency = 1
-		TextLabel36.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TextLabel36.TextSize = 14
-		TextLabel36.TextWrapped = true
-		TextLabel36.TextXAlignment = Enum.TextXAlignment.Left
-		local tween14 = TweenService:Create(TextLabel35, TweenInfo.new(0.5), { TextTransparency = 0 })
-		tween14:Play()
-		local tween15 = TweenService:Create(TextLabel36, TweenInfo.new(0.5), { TextTransparency = 0 })
-		tween15:Play()
-		local tween16 = TweenService:Create(Frame44, TweenInfo.new(0.5), { BackgroundTransparency = 0 })
-		tween16:Play()
-		task.wait(3)
-		local tween17 = TweenService:Create(TextLabel35, TweenInfo.new(0.5), { TextTransparency = 1 })
-		tween17:Play()
-		local tween18 = TweenService:Create(TextLabel36, TweenInfo.new(0.5), { TextTransparency = 1 })
-		tween18:Play()
-		local tween19 = TweenService:Create(Frame44, TweenInfo.new(0.5), { BackgroundTransparency = 1 })
-		tween19:Play()
-		task.wait(0.1)
-		Frame44:Destroy()
-	end)
-end)
-
-local Icon3 = Instance.new("ImageLabel")
-local TextButton4 = Instance.new("TextButton")
-local TextLabel7 = Instance.new("TextLabel")
-local Farming = Instance.new("ScrollingFrame")
-local UIPadding3 = Instance.new("UIPadding")
-local UIListLayout4 = Instance.new("UIListLayout")
-Icon3.Name = "Icon"
-Icon3.Parent = ButtonsHolder
-Icon3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Icon3.BackgroundTransparency = 1
-Icon3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Icon3.BorderSizePixel = 0
-Icon3.Size = UDim2.new(0, 20, 0, 20)
-Icon3.Image = "rbxassetid://6035039429"
-Icon3.ImageColor3 = Color3.fromRGB(200, 200, 200)
-TextButton4.Parent = Icon3
-TextButton4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton4.BackgroundTransparency = 1
-TextButton4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton4.BorderSizePixel = 0
-TextButton4.Size = UDim2.new(0, 115, 0, 20)
-TextButton4.AutoButtonColor = false
-TextButton4.Font = Enum.Font.SourceSans
-TextButton4.Text = ""
-TextButton4.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton4.TextSize = 14
-TextButton4.TextTransparency = 1
-TextLabel7.Parent = Icon3
-TextLabel7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel7.BackgroundTransparency = 1
-TextLabel7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel7.BorderSizePixel = 0
-TextLabel7.Position = UDim2.new(1.40379024, 0, 0, 0)
-TextLabel7.Size = UDim2.new(0, 85, 0, 20)
-TextLabel7.Font = Enum.Font.SourceSansBold
-TextLabel7.Text = "Farming"
-TextLabel7.TextColor3 = Color3.fromRGB(200, 200, 200)
-TextLabel7.TextSize = 14
-TextLabel7.TextXAlignment = Enum.TextXAlignment.Left
-Farming.Name = "Farming"
-Farming.Parent = TabName
-Farming.Active = true
-Farming.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Farming.BackgroundTransparency = 1
-Farming.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Farming.BorderSizePixel = 0
-Farming.Size = UDim2.new(0, 413, 0, 320)
-Farming.Visible = false
-Farming.ScrollBarThickness = 2
-UIPadding3.Parent = Farming
-UIPadding3.PaddingTop = UDim.new(0, 5)
-UIListLayout4.Parent = Farming
-UIListLayout4.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout4.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout4.Padding = UDim.new(0, 6)
-local changedSignal3 = UIListLayout4:GetPropertyChangedSignal("AbsoluteContentSize")
-
-changedSignal3:Connect(function()
-	Farming.CanvasSize = UDim2.new(0, 0, 0, 8)
-end)
-
-TextButton4.MouseEnter:Connect(function()
-	local tween20 = TweenService:Create(TextLabel7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween20.Completed:Connect(function(playbackState7)
-	end)
-
-	tween20:Play()
-	local tween21 = TweenService:Create(Icon3, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween21.Completed:Connect(function(playbackState8)
-	end)
-
-	tween21:Play()
-end)
-
-TextButton4.MouseLeave:Connect(function()
-	local tween22 = TweenService:Create(TextLabel7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween22.Completed:Connect(function(playbackState9)
-	end)
-
-	tween22:Play()
-	local tween23 = TweenService:Create(Icon3, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween23.Completed:Connect(function(playbackState10)
-	end)
-
-	tween23:Play()
-end)
-
-UserInputService.InputBegan:Connect(function(input5, gameProcessed5)
-end)
-
-local Section4 = Instance.new("TextLabel")
-local TextLiner4 = Instance.new("Frame")
-Section4.Name = "Section"
-Section4.Parent = Farming
-Section4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section4.BackgroundTransparency = 1
-Section4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section4.BorderSizePixel = 0
-Section4.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section4.Size = UDim2.new(0, 381, 0, 18)
-Section4.Font = Enum.Font.SourceSansBold
-Section4.Text = "Farming"
-Section4.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section4.TextSize = 14
-Section4.TextWrapped = true
-Section4.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner4.Name = "TextLiner"
-TextLiner4.Parent = Section4
-TextLiner4.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner4.BorderSizePixel = 0
-TextLiner4.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner4.Size = UDim2.new(0, 44, 0, 2)
-local DropButton = Instance.new("TextButton")
-local UIDrop = Instance.new("UICorner")
-local BoxDrop = Instance.new("TextBox")
-local UIDrop2 = Instance.new("UIPadding")
-local Icon4 = Instance.new("ImageButton")
-local DropHolder = Instance.new("Frame")
-local ScrollingFrame10 = Instance.new("ScrollingFrame")
-local UIListLayout11 = Instance.new("UIListLayout")
-local UIDrop3 = Instance.new("UICorner")
-DropButton.Name = "DropButton"
-DropButton.Parent = Farming
-DropButton.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DropButton.BorderSizePixel = 0
-DropButton.ClipsDescendants = true
-DropButton.Position = UDim2.new(0.0204359666, 0, 0.0790190771, 0)
-DropButton.Size = UDim2.new(0, 387, 0, 33)
-DropButton.AutoButtonColor = false
-DropButton.Font = Enum.Font.SourceSansBold
-DropButton.Text = "Select Field"
-DropButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-DropButton.TextSize = 13
-DropButton.TextTransparency = 1
-UIDrop.CornerRadius = UDim.new(0, 3)
-UIDrop.Name = "UIDrop"
-UIDrop.Parent = DropButton
-BoxDrop.Name = "BoxDrop"
-BoxDrop.Parent = DropButton
-BoxDrop.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-BoxDrop.BackgroundTransparency = 1
-BoxDrop.BorderColor3 = Color3.fromRGB(27, 42, 53)
-BoxDrop.BorderSizePixel = 0
-BoxDrop.Size = UDim2.new(0, 335, 0, 33)
-BoxDrop.Font = Enum.Font.SourceSansBold
-BoxDrop.Text = "Select Field"
-BoxDrop.TextColor3 = Color3.fromRGB(255, 255, 255)
-BoxDrop.TextSize = 13
-BoxDrop.TextXAlignment = Enum.TextXAlignment.Left
-UIDrop2.Name = "UIDrop"
-UIDrop2.Parent = BoxDrop
-UIDrop2.PaddingLeft = UDim.new(0, 6)
-Icon4.Name = "Icon"
-Icon4.Parent = DropButton
-Icon4.BackgroundTransparency = 1
-Icon4.BorderSizePixel = 0
-Icon4.ClipsDescendants = true
-Icon4.Position = UDim2.new(0.93, 0, 0.151, 0)
-Icon4.Rotation = 0
-Icon4.Size = UDim2.new(0, 23, 0, 22)
-Icon4.ZIndex = 1
-Icon4.Image = "rbxassetid://117983917327514"
-Icon4.SliceCenter = Rect.new(2, 2, 298, 298)
-Icon4.ImageColor3 = Color3.fromRGB(255, 255, 255)
-DropHolder.Name = "DropHolder"
-DropHolder.Parent = Farming
-DropHolder.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-DropHolder.BorderSizePixel = 0
-DropHolder.ClipsDescendants = true
-DropHolder.Position = UDim2.new(0.0204359666, 0, 0.398406386, 0)
-DropHolder.Size = UDim2.new(0, 387, 0, 0)
-DropHolder.Visible = false
-ScrollingFrame10.Name = "ScrollingFrame"
-ScrollingFrame10.Parent = DropHolder
-ScrollingFrame10.Active = true
-ScrollingFrame10.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-ScrollingFrame10.BorderSizePixel = 0
-ScrollingFrame10.Position = UDim2.new(0, 0, 0.0413798429, 0)
-ScrollingFrame10.Size = UDim2.new(0, 387, 0, 146)
-ScrollingFrame10.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollingFrame10.ScrollBarThickness = 0
-UIListLayout11.Name = "UIListLayout"
-UIListLayout11.Parent = ScrollingFrame10
-UIListLayout11.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout11.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout11.Padding = UDim.new(0, 5)
-UIDrop3.CornerRadius = UDim.new(0, 3)
-UIDrop3.Name = "UIDrop"
-UIDrop3.Parent = DropHolder
-local changedSignal4 = BoxDrop:GetPropertyChangedSignal("Text")
-
-changedSignal4:connect(function()
-	BoxDrop.TextXAlignment = Enum.TextXAlignment.Left
-end)
-
-local changedSignal5 = BoxDrop:GetPropertyChangedSignal("Text")
-
-changedSignal5:Connect(function()
-end)
-
-BoxDrop.Focused:Connect(function()
-	DropHolder.Visible = true
-	local tween24 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween24:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+local function setStatus(text)
+	if gui.status and gui.status.Parent then
+		gui.status.Text = text
 	end
-end)
+end
 
-BoxDrop.FocusLost:Connect(function(enterPressed, inputObject)
-end)
+local function getEvents()
+	return ReplicatedStorage:FindFirstChild("Events")
+end
 
-Icon4.MouseButton1Click:Connect(function()
-	local tween25 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween25:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+local function fireEvent(name, ...)
+	local events = getEvents()
+	local remote = events and events:FindFirstChild(name)
+	if not remote then
+		setStatus("Missing remote: " .. name)
+		return false
 	end
-end)
+	local ok = pcall(remote.FireServer, remote, ...)
+	if not ok then
+		setStatus("Remote failed: " .. name)
+	end
+	return ok
+end
 
-local changedSignal6 = UIListLayout11:GetPropertyChangedSignal("AbsoluteContentSize")
+local function getRoot()
+	local character = player.Character
+	local root = character and character:FindFirstChild("HumanoidRootPart")
+	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	if root and humanoid and humanoid.Health > 0 then
+		return root, humanoid
+	end
+	return nil, nil
+end
 
-changedSignal6:Connect(function()
-	ScrollingFrame10.CanvasSize = UDim2.new(0, 0, 0, 0)
-end)
+local function zeroVelocity(root)
+	pcall(function()
+		root.AssemblyLinearVelocity = Vector3.zero
+		root.AssemblyAngularVelocity = Vector3.zero
+	end)
+end
 
-ScrollingFrame10:GetChildren()
-local DB = Instance.new("TextButton")
-local UI = Instance.new("UICorner")
-DB.Name = "DB"
-DB.Parent = ScrollingFrame10
-DB.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB.BorderSizePixel = 0
-DB.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB.Size = UDim2.new(0, 369, 0, 33)
-DB.AutoButtonColor = false
-DB.Font = Enum.Font.SourceSansBold
-DB.Text = "Sunflower"
-DB.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB.TextSize = 13
-UI.CornerRadius = UDim.new(0, 3)
-UI.Name = "UI"
-UI.Parent = DB
-
-DB.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Sunflower"
-	DropHolder.Visible = true
-	local tween26 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween26:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+-- Short hops across frames. One long CFrame jump gets snapped back by the server,
+-- which is why the old teleports only worked sometimes.
+local function relocate(target, stepSize)
+	local root = getRoot()
+	if not root then
+		return false
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	local step = stepSize or CONFIG.stepDistance
+	local start = root.Position
+	local steps = math.clamp(math.ceil((target - start).Magnitude / step), 1, 60)
 
-local DB2 = Instance.new("TextButton")
-local UI2 = Instance.new("UICorner")
-DB2.Name = "DB"
-DB2.Parent = ScrollingFrame10
-DB2.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB2.BorderSizePixel = 0
-DB2.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB2.Size = UDim2.new(0, 369, 0, 33)
-DB2.AutoButtonColor = false
-DB2.Font = Enum.Font.SourceSansBold
-DB2.Text = "Dandelion"
-DB2.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB2.TextSize = 13
-UI2.CornerRadius = UDim.new(0, 3)
-UI2.Name = "UI"
-UI2.Parent = DB2
-
-DB2.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Dandelion"
-	local tween27 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween27:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+	for index = 1, steps do
+		if not state.alive then
+			return false
+		end
+		root = getRoot()
+		if not root then
+			return false
+		end
+		root.CFrame = CFrame.new(start:Lerp(target, index / steps))
+		zeroVelocity(root)
+		RunService.Heartbeat:Wait()
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB3 = Instance.new("TextButton")
-local UI3 = Instance.new("UICorner")
-DB3.Name = "DB"
-DB3.Parent = ScrollingFrame10
-DB3.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB3.BorderSizePixel = 0
-DB3.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB3.Size = UDim2.new(0, 369, 0, 33)
-DB3.AutoButtonColor = false
-DB3.Font = Enum.Font.SourceSansBold
-DB3.Text = "Mushroom"
-DB3.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB3.TextSize = 13
-UI3.CornerRadius = UDim.new(0, 3)
-UI3.Name = "UI"
-UI3.Parent = DB3
-
-DB3.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Mushroom"
-	DropHolder.Visible = true
-	local tween28 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween28:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+	for _ = 1, 3 do
+		root = getRoot()
+		if not root then
+			return false
+		end
+		root.CFrame = CFrame.new(target)
+		zeroVelocity(root)
+		RunService.Heartbeat:Wait()
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	root = getRoot()
+	return root ~= nil and (root.Position - target).Magnitude <= CONFIG.arriveRadius + 5
+end
 
-local DB4 = Instance.new("TextButton")
-local UI4 = Instance.new("UICorner")
-DB4.Name = "DB"
-DB4.Parent = ScrollingFrame10
-DB4.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB4.BorderSizePixel = 0
-DB4.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB4.Size = UDim2.new(0, 369, 0, 33)
-DB4.AutoButtonColor = false
-DB4.Font = Enum.Font.SourceSansBold
-DB4.Text = "Blue_Flower"
-DB4.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB4.TextSize = 13
-UI4.CornerRadius = UDim.new(0, 3)
-UI4.Name = "UI"
-UI4.Parent = DB4
+local function normalize(text)
+	return (string.lower(text):gsub("[^%a%d]", ""))
+end
 
-DB4.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Blue_Flower"
-	local tween29 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween29:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
+-- Fields live in Workspace.FlowerZones as one part per field. FlowerZones can
+-- also contain parts that do not match a known name, so those are kept too.
+local function scanFields()
+	local zones = workspace:FindFirstChild("FlowerZones")
+	local parts = {}
 
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+	if zones then
+		for _, child in ipairs(zones:GetChildren()) do
+			if child:IsA("BasePart") then
+				table.insert(parts, child)
+			end
+		end
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	local result = {}
+	local used = {}
 
-local DB5 = Instance.new("TextButton")
-local UI5 = Instance.new("UICorner")
-DB5.Name = "DB"
-DB5.Parent = ScrollingFrame10
-DB5.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB5.BorderSizePixel = 0
-DB5.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB5.Size = UDim2.new(0, 369, 0, 33)
-DB5.AutoButtonColor = false
-DB5.Font = Enum.Font.SourceSansBold
-DB5.Text = "Clover"
-DB5.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB5.TextSize = 13
-UI5.CornerRadius = UDim.new(0, 3)
-UI5.Name = "UI"
-UI5.Parent = DB5
-
-DB5.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Clover"
-	DropHolder.Visible = true
-	local tween30 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween30:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+	for _, fieldName in ipairs(FIELD_NAMES) do
+		local target = normalize(fieldName)
+		for _, part in ipairs(parts) do
+			if not used[part] then
+				local key = normalize(part.Name)
+				if key ~= "" and (key == target or string.find(key, target, 1, true) or string.find(target, key, 1, true)) then
+					used[part] = true
+					result[fieldName] = part
+					break
+				end
+			end
+		end
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB6 = Instance.new("TextButton")
-local UI6 = Instance.new("UICorner")
-DB6.Name = "DB"
-DB6.Parent = ScrollingFrame10
-DB6.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB6.BorderSizePixel = 0
-DB6.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB6.Size = UDim2.new(0, 369, 0, 33)
-DB6.AutoButtonColor = false
-DB6.Font = Enum.Font.SourceSansBold
-DB6.Text = "Spider"
-DB6.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB6.TextSize = 13
-UI6.CornerRadius = UDim.new(0, 3)
-UI6.Name = "UI"
-UI6.Parent = DB6
-
-DB6.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Spider"
-	local tween31 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween31:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+	for _, part in ipairs(parts) do
+		if not used[part] then
+			local name = (part.Name:gsub("%s*[Ff]ield%s*$", ""))
+			if name == "" then
+				name = part.Name
+			end
+			used[part] = true
+			result[name] = part
+		end
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	return result
+end
 
-local DB7 = Instance.new("TextButton")
-local UI7 = Instance.new("UICorner")
-DB7.Name = "DB"
-DB7.Parent = ScrollingFrame10
-DB7.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB7.BorderSizePixel = 0
-DB7.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB7.Size = UDim2.new(0, 369, 0, 33)
-DB7.AutoButtonColor = false
-DB7.Font = Enum.Font.SourceSansBold
-DB7.Text = "Strawberry"
-DB7.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB7.TextSize = 13
-UI7.CornerRadius = UDim.new(0, 3)
-UI7.Name = "UI"
-UI7.Parent = DB7
+local function fieldOptions()
+	local names = {}
+	for _, name in ipairs(FIELD_NAMES) do
+		if state.fields[name] then
+			table.insert(names, name)
+		end
+	end
+	for name in pairs(state.fields) do
+		local known = false
+		for _, existing in ipairs(names) do
+			if existing == name then
+				known = true
+				break
+			end
+		end
+		if not known then
+			table.insert(names, name)
+		end
+	end
+	table.sort(names)
+	return names
+end
 
-DB7.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Strawberry"
-	DropHolder.Visible = true
-	local tween32 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween32:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
+local function getField()
+	local part = state.fields[CONFIG.field]
+	if part and part.Parent then
+		return { name = CONFIG.field, part = part }
+	end
+	return nil
+end
 
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+local function fieldPoint(entry)
+	local part = entry.part
+	local size = part.Size
+	local radiusX = math.max(size.X / 2 - 8, 2)
+	local radiusZ = math.max(size.Z / 2 - 8, 2)
+	local angle = math.rad((state.ring % CONFIG.ringPoints) * (360 / CONFIG.ringPoints) + math.random(-10, 10))
+	local offset = Vector3.new(math.cos(angle) * radiusX * 0.8, size.Y / 2 + 4, math.sin(angle) * radiusZ * 0.8)
+	return (part.CFrame * CFrame.new(offset)).Position
+end
+
+local function insideField(entry, position, margin)
+	local localPoint = entry.part.CFrame:PointToObjectSpace(position)
+	return math.abs(localPoint.X) <= entry.part.Size.X / 2 + margin
+		and math.abs(localPoint.Z) <= entry.part.Size.Z / 2 + margin
+end
+
+local function getPollen()
+	local stats = player:FindFirstChild("CoreStats")
+	local pollen = stats and stats:FindFirstChild("Pollen")
+	local capacity = stats and stats:FindFirstChild("Capacity")
+	if pollen and capacity and pollen:IsA("ValueBase") and capacity:IsA("ValueBase") then
+		return pollen.Value, capacity.Value
+	end
+	return nil, nil
+end
+
+local function shouldConvert()
+	if not CONFIG.autoConvert then
+		return false
+	end
+	local pollen, capacity = getPollen()
+	if pollen and capacity and capacity > 0 then
+		return pollen / capacity >= CONFIG.convertAt
+	end
+	return os.clock() - state.lastConvert > CONFIG.convertFallback
+end
+
+-- Tokens sit in Workspace.Collectibles as parts named "C" or the player's name.
+local function nearestToken(position, radius)
+	local folder = workspace:FindFirstChild("Collectibles")
+	if not folder then
+		return nil
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	local now = os.clock()
+	local best, bestDistance = nil, radius
 
-local DB8 = Instance.new("TextButton")
-local UI8 = Instance.new("UICorner")
-DB8.Name = "DB"
-DB8.Parent = ScrollingFrame10
-DB8.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB8.BorderSizePixel = 0
-DB8.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB8.Size = UDim2.new(0, 369, 0, 33)
-DB8.AutoButtonColor = false
-DB8.Font = Enum.Font.SourceSansBold
-DB8.Text = "Bamboo"
-DB8.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB8.TextSize = 13
-UI8.CornerRadius = UDim.new(0, 3)
-UI8.Name = "UI"
-UI8.Parent = DB8
-
-DB8.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Bamboo"
-	local tween33 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween33:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+	for _, part in ipairs(folder:GetChildren()) do
+		if part:IsA("BasePart") and (part.Name == "C" or part.Name == player.Name) then
+			local tried = tokenCooldowns[part]
+			if not tried or now - tried > 1.5 then
+				local distance = (part.Position - position).Magnitude
+				if distance <= bestDistance then
+					best, bestDistance = part, distance
+				end
+			end
+		end
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	return best
+end
 
-local DB9 = Instance.new("TextButton")
-local UI9 = Instance.new("UICorner")
-DB9.Name = "DB"
-DB9.Parent = ScrollingFrame10
-DB9.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB9.BorderSizePixel = 0
-DB9.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB9.Size = UDim2.new(0, 369, 0, 33)
-DB9.AutoButtonColor = false
-DB9.Font = Enum.Font.SourceSansBold
-DB9.Text = "Pineapple"
-DB9.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB9.TextSize = 13
-UI9.CornerRadius = UDim.new(0, 3)
-UI9.Name = "UI"
-UI9.Parent = DB9
+local function touchPart(target)
+	if not firetouchinterest then
+		return
+	end
+	local character = player.Character
+	if not character then
+		return
+	end
+	for _, limb in ipairs(character:GetChildren()) do
+		if limb:IsA("BasePart") then
+			pcall(firetouchinterest, limb, target, 0)
+			pcall(firetouchinterest, limb, target, 1)
+		end
+	end
+end
 
-DB9.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Pineapple"
-	DropHolder.Visible = true
-	local tween34 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween34:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+local function grabToken(token)
+	local root = getRoot()
+	if not root or not token.Parent then
+		return false
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	if CONFIG.tokenMode == "Teleport" then
+		relocate(token.Position + Vector3.new(0, 2, 0), 40)
+	else
+		if (root.Position - token.Position).Magnitude > 10 then
+			if state.tokenTarget ~= token then
+				state.tokenTarget = token
+				state.tokenSince = os.clock()
+			end
 
-local DB10 = Instance.new("TextButton")
-local UI10 = Instance.new("UICorner")
-DB10.Name = "DB"
-DB10.Parent = ScrollingFrame10
-DB10.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB10.BorderSizePixel = 0
-DB10.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB10.Size = UDim2.new(0, 369, 0, 33)
-DB10.AutoButtonColor = false
-DB10.Font = Enum.Font.SourceSansBold
-DB10.Text = "Stump"
-DB10.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB10.TextSize = 13
-UI10.CornerRadius = UDim.new(0, 3)
-UI10.Name = "UI"
-UI10.Parent = DB10
+			-- Unreachable token: give up after 2.5s instead of walking at it forever.
+			if os.clock() - state.tokenSince > 2.5 then
+				tokenCooldowns[token] = os.clock() + 3
+				state.tokenTarget = nil
+				return false
+			end
 
-DB10.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Stump"
-	local tween35 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween35:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+			local _, humanoid = getRoot()
+			if humanoid then
+				humanoid:MoveTo(token.Position)
+			end
+			return false
+		end
 	end
 
-	BoxDrop.Text = "Select Field"
-end)
+	state.tokenTarget = nil
 
-local DB11 = Instance.new("TextButton")
-local UI11 = Instance.new("UICorner")
-DB11.Name = "DB"
-DB11.Parent = ScrollingFrame10
-DB11.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB11.BorderSizePixel = 0
-DB11.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB11.Size = UDim2.new(0, 369, 0, 33)
-DB11.AutoButtonColor = false
-DB11.Font = Enum.Font.SourceSansBold
-DB11.Text = "Pumpkin"
-DB11.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB11.TextSize = 13
-UI11.CornerRadius = UDim.new(0, 3)
-UI11.Name = "UI"
-UI11.Parent = DB11
-
-DB11.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Pumpkin"
-	DropHolder.Visible = true
-	local tween36 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween36:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
+	-- Park on the token for one frame so a real touch happens even without
+	-- firetouchinterest, then fire the touch for instant pickup.
+	local parked = getRoot()
+	if parked then
+		parked.CFrame = CFrame.new(token.Position + Vector3.new(0, 2, 0))
+		zeroVelocity(parked)
 	end
+	touchPart(token)
+	state.tokenCooldowns[token] = os.clock()
+	state.tokens = state.tokens + 1
+	return true
+end
 
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB12 = Instance.new("TextButton")
-local UI12 = Instance.new("UICorner")
-DB12.Name = "DB"
-DB12.Parent = ScrollingFrame10
-DB12.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB12.BorderSizePixel = 0
-DB12.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB12.Size = UDim2.new(0, 369, 0, 33)
-DB12.AutoButtonColor = false
-DB12.Font = Enum.Font.SourceSansBold
-DB12.Text = "Cactus"
-DB12.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB12.TextSize = 13
-UI12.CornerRadius = UDim.new(0, 3)
-UI12.Name = "UI"
-UI12.Parent = DB12
-
-DB12.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Cactus"
-	local tween37 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween37:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
-	end
-
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB13 = Instance.new("TextButton")
-local UI13 = Instance.new("UICorner")
-DB13.Name = "DB"
-DB13.Parent = ScrollingFrame10
-DB13.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB13.BorderSizePixel = 0
-DB13.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB13.Size = UDim2.new(0, 369, 0, 33)
-DB13.AutoButtonColor = false
-DB13.Font = Enum.Font.SourceSansBold
-DB13.Text = "Rose"
-DB13.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB13.TextSize = 13
-UI13.CornerRadius = UDim.new(0, 3)
-UI13.Name = "UI"
-UI13.Parent = DB13
-
-DB13.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Rose"
-	DropHolder.Visible = true
-	local tween38 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween38:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
-	end
-
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB14 = Instance.new("TextButton")
-local UI14 = Instance.new("UICorner")
-DB14.Name = "DB"
-DB14.Parent = ScrollingFrame10
-DB14.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB14.BorderSizePixel = 0
-DB14.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB14.Size = UDim2.new(0, 369, 0, 33)
-DB14.AutoButtonColor = false
-DB14.Font = Enum.Font.SourceSansBold
-DB14.Text = "PineTreeForest"
-DB14.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB14.TextSize = 13
-UI14.CornerRadius = UDim.new(0, 3)
-UI14.Name = "UI"
-UI14.Parent = DB14
-
-DB14.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: PineTreeForest"
-	local tween39 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween39:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
-	end
-
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB15 = Instance.new("TextButton")
-local UI15 = Instance.new("UICorner")
-DB15.Name = "DB"
-DB15.Parent = ScrollingFrame10
-DB15.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB15.BorderSizePixel = 0
-DB15.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB15.Size = UDim2.new(0, 369, 0, 33)
-DB15.AutoButtonColor = false
-DB15.Font = Enum.Font.SourceSansBold
-DB15.Text = "Mountain"
-DB15.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB15.TextSize = 13
-UI15.CornerRadius = UDim.new(0, 3)
-UI15.Name = "UI"
-UI15.Parent = DB15
-
-DB15.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Mountain"
-	DropHolder.Visible = true
-	local tween40 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween40:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
-	end
-
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB16 = Instance.new("TextButton")
-local UI16 = Instance.new("UICorner")
-DB16.Name = "DB"
-DB16.Parent = ScrollingFrame10
-DB16.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB16.BorderSizePixel = 0
-DB16.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB16.Size = UDim2.new(0, 369, 0, 33)
-DB16.AutoButtonColor = false
-DB16.Font = Enum.Font.SourceSansBold
-DB16.Text = "Coconut"
-DB16.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB16.TextSize = 13
-UI16.CornerRadius = UDim.new(0, 3)
-UI16.Name = "UI"
-UI16.Parent = DB16
-
-DB16.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Coconut"
-	local tween41 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween41:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder.Visible = false
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
-	end
-
-	BoxDrop.Text = "Select Field"
-end)
-
-local DB17 = Instance.new("TextButton")
-local UI17 = Instance.new("UICorner")
-DB17.Name = "DB"
-DB17.Parent = ScrollingFrame10
-DB17.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB17.BorderSizePixel = 0
-DB17.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB17.Size = UDim2.new(0, 369, 0, 33)
-DB17.AutoButtonColor = false
-DB17.Font = Enum.Font.SourceSansBold
-DB17.Text = "Pepper"
-DB17.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB17.TextSize = 13
-UI17.CornerRadius = UDim.new(0, 3)
-UI17.Name = "UI"
-UI17.Parent = DB17
-
-DB17.MouseButton1Click:Connect(function()
-	CoreGui.KronHub.Main.Tabs.TabName.Farming.TextBox.Text = "Field: Pepper"
-	DropHolder.Visible = true
-	local tween42 = TweenService:Create(Icon4, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween42:Play()
-	DropHolder:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame10:GetChildren()
-
-	for _, textButton in ipairs({
-		DB, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10, DB11, DB12, DB13, DB14, DB15, DB16, DB17,
-	}) do
-		textButton.Visible = true
-	end
-
-	BoxDrop.Text = "Select Field"
-end)
-
-local TextBox6 = Instance.new("TextLabel")
-local UICorner27 = Instance.new("UICorner")
-TextBox6.Name = "TextBox"
-TextBox6.Parent = Farming
-TextBox6.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-TextBox6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextBox6.BorderSizePixel = 0
-TextBox6.Position = UDim2.new(0.0314769968, 0, 0.0761904791, 0)
-TextBox6.Size = UDim2.new(0, 387, 0, 24)
-TextBox6.Font = Enum.Font.SourceSansBold
-TextBox6.Text = "Field: Sunflower"
-TextBox6.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextBox6.TextSize = 14
-TextBox6.TextWrapped = true
-UICorner27.CornerRadius = UDim.new(0, 3)
-UICorner27.Parent = TextBox6
-local Toggle = Instance.new("TextButton")
-local UICToggle = Instance.new("UICorner")
-local TextToggle = Instance.new("TextLabel")
-local BackToggle = Instance.new("Frame")
-local UIC1 = Instance.new("UICorner")
-local InToggle = Instance.new("Frame")
-local UIC2 = Instance.new("UICorner")
-Toggle.Name = "Toggle"
-Toggle.Parent = Farming
-Toggle.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle.BorderSizePixel = 0
-Toggle.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle.Size = UDim2.new(0, 387, 0, 33)
-Toggle.AutoButtonColor = false
-Toggle.Font = Enum.Font.SourceSansBold
-Toggle.Text = ""
-Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle.TextSize = 14
-UICToggle.CornerRadius = UDim.new(0, 3)
-UICToggle.Name = "UICToggle"
-UICToggle.Parent = Toggle
-TextToggle.Name = "TextToggle"
-TextToggle.Parent = Toggle
-TextToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle.BackgroundTransparency = 1
-TextToggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle.BorderSizePixel = 0
-TextToggle.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle.Size = UDim2.new(0, 200, 0, 18)
-TextToggle.Font = Enum.Font.SourceSansBold
-TextToggle.Text = "Autofarm"
-TextToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle.TextSize = 14
-TextToggle.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle.Name = "BackToggle"
-BackToggle.Parent = Toggle
-BackToggle.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle.BorderSizePixel = 0
-BackToggle.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle.Size = UDim2.new(0, 40, 0, 18)
-UIC1.CornerRadius = UDim.new(1, 3)
-UIC1.Name = "UIC1"
-UIC1.Parent = BackToggle
-InToggle.Name = "InToggle"
-InToggle.Parent = BackToggle
-InToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle.BorderSizePixel = 0
-InToggle.Size = UDim2.new(0, 19, 0, 18)
-UIC2.CornerRadius = UDim.new(1, 3)
-UIC2.Name = "UIC2"
-UIC2.Parent = InToggle
-
-Toggle.MouseButton1Click:Connect(function()
-	InToggle:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-	getgenv().AutoFarm = true
-	task.wait()
-	-- condition: game.Players.LocalPlayer.CoreStats.Capacity.Value <= game.Players.LocalPlayer.CoreStats.Pollen.Value  (assumed false)
-	game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-	local tween43 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(2, Enum.EasingStyle.Linear), { CFrame = CFrame.new(Vector3.new(-488.42440795898438, 123.648681640625, 535.53216552734375)) })
-	tween43:Play()
-	tween43.Completed:Wait()
-	getgenv().AutoFarmSpeedOn = true
-	-- [envlog] error: Script:1: attempt to compare number < userdata
-end)
-
-local Section5 = Instance.new("TextLabel")
-local TextLiner5 = Instance.new("Frame")
-Section5.Name = "Section"
-Section5.Parent = Farming
-Section5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section5.BackgroundTransparency = 1
-Section5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section5.BorderSizePixel = 0
-Section5.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section5.Size = UDim2.new(0, 381, 0, 18)
-Section5.Font = Enum.Font.SourceSansBold
-Section5.Text = "Settings"
-Section5.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section5.TextSize = 14
-Section5.TextWrapped = true
-Section5.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner5.Name = "TextLiner"
-TextLiner5.Parent = Section5
-TextLiner5.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner5.BorderSizePixel = 0
-TextLiner5.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner5.Size = UDim2.new(0, 44, 0, 2)
-local Toggle2 = Instance.new("TextButton")
-local UICToggle2 = Instance.new("UICorner")
-local TextToggle2 = Instance.new("TextLabel")
-local BackToggle2 = Instance.new("Frame")
-local UIC12 = Instance.new("UICorner")
-local InToggle2 = Instance.new("Frame")
-local UIC22 = Instance.new("UICorner")
-Toggle2.Name = "Toggle"
-Toggle2.Parent = Farming
-Toggle2.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle2.BorderSizePixel = 0
-Toggle2.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle2.Size = UDim2.new(0, 387, 0, 33)
-Toggle2.AutoButtonColor = false
-Toggle2.Font = Enum.Font.SourceSansBold
-Toggle2.Text = ""
-Toggle2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle2.TextSize = 14
-UICToggle2.CornerRadius = UDim.new(0, 3)
-UICToggle2.Name = "UICToggle"
-UICToggle2.Parent = Toggle2
-TextToggle2.Name = "TextToggle"
-TextToggle2.Parent = Toggle2
-TextToggle2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle2.BackgroundTransparency = 1
-TextToggle2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle2.BorderSizePixel = 0
-TextToggle2.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle2.Size = UDim2.new(0, 200, 0, 18)
-TextToggle2.Font = Enum.Font.SourceSansBold
-TextToggle2.Text = "Auto Dig"
-TextToggle2.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle2.TextSize = 14
-TextToggle2.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle2.Name = "BackToggle"
-BackToggle2.Parent = Toggle2
-BackToggle2.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle2.BorderSizePixel = 0
-BackToggle2.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle2.Size = UDim2.new(0, 40, 0, 18)
-UIC12.CornerRadius = UDim.new(1, 3)
-UIC12.Name = "UIC1"
-UIC12.Parent = BackToggle2
-InToggle2.Name = "InToggle"
-InToggle2.Parent = BackToggle2
-InToggle2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle2.BorderSizePixel = 0
-InToggle2.Size = UDim2.new(0, 19, 0, 18)
-UIC22.CornerRadius = UDim.new(1, 3)
-UIC22.Name = "UIC2"
-UIC22.Parent = InToggle2
-
-Toggle2.MouseButton1Click:Connect(function()
-	getgenv().CollectTokens = true
-	InToggle2:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-end)
-
-local Toggle3 = Instance.new("TextButton")
-local UICToggle3 = Instance.new("UICorner")
-local TextToggle3 = Instance.new("TextLabel")
-local BackToggle3 = Instance.new("Frame")
-local UIC13 = Instance.new("UICorner")
-local InToggle3 = Instance.new("Frame")
-local UIC23 = Instance.new("UICorner")
-Toggle3.Name = "Toggle"
-Toggle3.Parent = Farming
-Toggle3.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle3.BorderSizePixel = 0
-Toggle3.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle3.Size = UDim2.new(0, 387, 0, 33)
-Toggle3.AutoButtonColor = false
-Toggle3.Font = Enum.Font.SourceSansBold
-Toggle3.Text = ""
-Toggle3.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle3.TextSize = 14
-UICToggle3.CornerRadius = UDim.new(0, 3)
-UICToggle3.Name = "UICToggle"
-UICToggle3.Parent = Toggle3
-TextToggle3.Name = "TextToggle"
-TextToggle3.Parent = Toggle3
-TextToggle3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle3.BackgroundTransparency = 1
-TextToggle3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle3.BorderSizePixel = 0
-TextToggle3.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle3.Size = UDim2.new(0, 200, 0, 18)
-TextToggle3.Font = Enum.Font.SourceSansBold
-TextToggle3.Text = "Sprinkler"
-TextToggle3.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle3.TextSize = 14
-TextToggle3.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle3.Name = "BackToggle"
-BackToggle3.Parent = Toggle3
-BackToggle3.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle3.BorderSizePixel = 0
-BackToggle3.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle3.Size = UDim2.new(0, 40, 0, 18)
-UIC13.CornerRadius = UDim.new(1, 3)
-UIC13.Name = "UIC1"
-UIC13.Parent = BackToggle3
-InToggle3.Name = "InToggle"
-InToggle3.Parent = BackToggle3
-InToggle3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle3.BorderSizePixel = 0
-InToggle3.Size = UDim2.new(0, 19, 0, 18)
-UIC23.CornerRadius = UDim.new(1, 3)
-UIC23.Name = "UIC2"
-UIC23.Parent = InToggle3
-
-Toggle3.MouseButton1Click:Connect(function()
-	getgenv().AutoDig = true
-	InToggle3:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-end)
-
-local Toggle4 = Instance.new("TextButton")
-local UICToggle4 = Instance.new("UICorner")
-local TextToggle4 = Instance.new("TextLabel")
-local BackToggle4 = Instance.new("Frame")
-local UIC14 = Instance.new("UICorner")
-local InToggle4 = Instance.new("Frame")
-local UIC24 = Instance.new("UICorner")
-Toggle4.Name = "Toggle"
-Toggle4.Parent = Farming
-Toggle4.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle4.BorderSizePixel = 0
-Toggle4.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle4.Size = UDim2.new(0, 387, 0, 33)
-Toggle4.AutoButtonColor = false
-Toggle4.Font = Enum.Font.SourceSansBold
-Toggle4.Text = ""
-Toggle4.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle4.TextSize = 14
-UICToggle4.CornerRadius = UDim.new(0, 3)
-UICToggle4.Name = "UICToggle"
-UICToggle4.Parent = Toggle4
-TextToggle4.Name = "TextToggle"
-TextToggle4.Parent = Toggle4
-TextToggle4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle4.BackgroundTransparency = 1
-TextToggle4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle4.BorderSizePixel = 0
-TextToggle4.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle4.Size = UDim2.new(0, 200, 0, 18)
-TextToggle4.Font = Enum.Font.SourceSansBold
-TextToggle4.Text = "Convert Ballons"
-TextToggle4.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle4.TextSize = 14
-TextToggle4.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle4.Name = "BackToggle"
-BackToggle4.Parent = Toggle4
-BackToggle4.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle4.BorderSizePixel = 0
-BackToggle4.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle4.Size = UDim2.new(0, 40, 0, 18)
-UIC14.CornerRadius = UDim.new(1, 3)
-UIC14.Name = "UIC1"
-UIC14.Parent = BackToggle4
-InToggle4.Name = "InToggle"
-InToggle4.Parent = BackToggle4
-InToggle4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle4.BorderSizePixel = 0
-InToggle4.Size = UDim2.new(0, 19, 0, 18)
-UIC24.CornerRadius = UDim.new(1, 3)
-UIC24.Name = "UIC2"
-UIC24.Parent = InToggle4
-
-Toggle4.MouseButton1Click:Connect(function()
-	getgenv().placesprinkler = true
-	InToggle4:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-end)
-
-local Section6 = Instance.new("TextLabel")
-local TextLiner6 = Instance.new("Frame")
-Section6.Name = "Section"
-Section6.Parent = Farming
-Section6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section6.BackgroundTransparency = 1
-Section6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section6.BorderSizePixel = 0
-Section6.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section6.Size = UDim2.new(0, 381, 0, 18)
-Section6.Font = Enum.Font.SourceSansBold
-Section6.Text = "Extra Settings"
-Section6.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section6.TextSize = 14
-Section6.TextWrapped = true
-Section6.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner6.Name = "TextLiner"
-TextLiner6.Parent = Section6
-TextLiner6.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner6.BorderSizePixel = 0
-TextLiner6.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner6.Size = UDim2.new(0, 44, 0, 2)
-local Toggle5 = Instance.new("TextButton")
-local UICToggle5 = Instance.new("UICorner")
-local TextToggle5 = Instance.new("TextLabel")
-local BackToggle5 = Instance.new("Frame")
-local UIC15 = Instance.new("UICorner")
-local InToggle5 = Instance.new("Frame")
-local UIC25 = Instance.new("UICorner")
-Toggle5.Name = "Toggle"
-Toggle5.Parent = Farming
-Toggle5.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle5.BorderSizePixel = 0
-Toggle5.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle5.Size = UDim2.new(0, 387, 0, 33)
-Toggle5.AutoButtonColor = false
-Toggle5.Font = Enum.Font.SourceSansBold
-Toggle5.Text = ""
-Toggle5.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle5.TextSize = 14
-UICToggle5.CornerRadius = UDim.new(0, 3)
-UICToggle5.Name = "UICToggle"
-UICToggle5.Parent = Toggle5
-TextToggle5.Name = "TextToggle"
-TextToggle5.Parent = Toggle5
-TextToggle5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle5.BackgroundTransparency = 1
-TextToggle5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle5.BorderSizePixel = 0
-TextToggle5.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle5.Size = UDim2.new(0, 200, 0, 18)
-TextToggle5.Font = Enum.Font.SourceSansBold
-TextToggle5.Text = "Farm Bubble"
-TextToggle5.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle5.TextSize = 14
-TextToggle5.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle5.Name = "BackToggle"
-BackToggle5.Parent = Toggle5
-BackToggle5.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle5.BorderSizePixel = 0
-BackToggle5.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle5.Size = UDim2.new(0, 40, 0, 18)
-UIC15.CornerRadius = UDim.new(1, 3)
-UIC15.Name = "UIC1"
-UIC15.Parent = BackToggle5
-InToggle5.Name = "InToggle"
-InToggle5.Parent = BackToggle5
-InToggle5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle5.BorderSizePixel = 0
-InToggle5.Size = UDim2.new(0, 19, 0, 18)
-UIC25.CornerRadius = UDim.new(1, 3)
-UIC25.Name = "UIC2"
-UIC25.Parent = InToggle5
-
-Toggle5.MouseButton1Click:Connect(function()
-	getgenv().convertballon = true
-	InToggle5:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-end)
-
-local Icon5 = Instance.new("ImageLabel")
-local TextButton28 = Instance.new("TextButton")
-local TextLabel17 = Instance.new("TextLabel")
-local Teleport = Instance.new("ScrollingFrame")
-local UIPadding5 = Instance.new("UIPadding")
-local UIListLayout6 = Instance.new("UIListLayout")
-Icon5.Name = "Icon"
-Icon5.Parent = ButtonsHolder
-Icon5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Icon5.BackgroundTransparency = 1
-Icon5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Icon5.BorderSizePixel = 0
-Icon5.Size = UDim2.new(0, 20, 0, 20)
-Icon5.Image = "rbxassetid://6031154875"
-Icon5.ImageColor3 = Color3.fromRGB(200, 200, 200)
-TextButton28.Parent = Icon5
-TextButton28.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton28.BackgroundTransparency = 1
-TextButton28.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton28.BorderSizePixel = 0
-TextButton28.Size = UDim2.new(0, 115, 0, 20)
-TextButton28.AutoButtonColor = false
-TextButton28.Font = Enum.Font.SourceSans
-TextButton28.Text = ""
-TextButton28.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton28.TextSize = 14
-TextButton28.TextTransparency = 1
-TextLabel17.Parent = Icon5
-TextLabel17.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel17.BackgroundTransparency = 1
-TextLabel17.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel17.BorderSizePixel = 0
-TextLabel17.Position = UDim2.new(1.40379024, 0, 0, 0)
-TextLabel17.Size = UDim2.new(0, 85, 0, 20)
-TextLabel17.Font = Enum.Font.SourceSansBold
-TextLabel17.Text = "Teleport"
-TextLabel17.TextColor3 = Color3.fromRGB(200, 200, 200)
-TextLabel17.TextSize = 14
-TextLabel17.TextXAlignment = Enum.TextXAlignment.Left
-Teleport.Name = "Teleport"
-Teleport.Parent = TabName
-Teleport.Active = true
-Teleport.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Teleport.BackgroundTransparency = 1
-Teleport.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Teleport.BorderSizePixel = 0
-Teleport.Size = UDim2.new(0, 413, 0, 320)
-Teleport.Visible = false
-Teleport.ScrollBarThickness = 2
-UIPadding5.Parent = Teleport
-UIPadding5.PaddingTop = UDim.new(0, 5)
-UIListLayout6.Parent = Teleport
-UIListLayout6.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout6.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout6.Padding = UDim.new(0, 6)
-local changedSignal7 = UIListLayout6:GetPropertyChangedSignal("AbsoluteContentSize")
-
-changedSignal7:Connect(function()
-	getgenv().collectbubble = true
-	Teleport.CanvasSize = UDim2.new(0, 0, 0, 8)
-end)
-
-TextButton28.MouseEnter:Connect(function()
-	local tween44 = TweenService:Create(TextLabel17, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween44.Completed:Connect(function(playbackState11)
+local function clickScreen()
+	local camera = workspace.CurrentCamera
+	local position = camera and camera.ViewportSize / 2 or Vector2.new(400, 300)
+	pcall(function()
+		VirtualUser:Button1Down(position, camera)
+		VirtualUser:Button1Up(position, camera)
 	end)
+end
 
-	tween44:Play()
-	local tween45 = TweenService:Create(Icon5, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(255, 255, 255) })
+local function swing()
+	local now = os.clock()
 
-	tween45.Completed:Connect(function(playbackState12)
-	end)
-
-	tween45:Play()
-end)
-
-TextButton28.MouseLeave:Connect(function()
-	local tween46 = TweenService:Create(TextLabel17, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween46.Completed:Connect(function(playbackState13)
-	end)
-
-	tween46:Play()
-	local tween47 = TweenService:Create(Icon5, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween47.Completed:Connect(function(playbackState14)
-	end)
-
-	tween47:Play()
-end)
-
-UserInputService.InputBegan:Connect(function(input6, gameProcessed6)
-end)
-
-local Section7 = Instance.new("TextLabel")
-local TextLiner7 = Instance.new("Frame")
-Section7.Name = "Section"
-Section7.Parent = Teleport
-Section7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section7.BackgroundTransparency = 1
-Section7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section7.BorderSizePixel = 0
-Section7.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section7.Size = UDim2.new(0, 381, 0, 18)
-Section7.Font = Enum.Font.SourceSansBold
-Section7.Text = "Locations"
-Section7.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section7.TextSize = 14
-Section7.TextWrapped = true
-Section7.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner7.Name = "TextLiner"
-TextLiner7.Parent = Section7
-TextLiner7.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner7.BorderSizePixel = 0
-TextLiner7.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner7.Size = UDim2.new(0, 44, 0, 2)
-local DropButton2 = Instance.new("TextButton")
-local UIDrop4 = Instance.new("UICorner")
-local BoxDrop2 = Instance.new("TextBox")
-local UIDrop5 = Instance.new("UIPadding")
-local Icon6 = Instance.new("ImageButton")
-local DropHolder2 = Instance.new("Frame")
-local ScrollingFrame11 = Instance.new("ScrollingFrame")
-local UIListLayout12 = Instance.new("UIListLayout")
-local UIDrop6 = Instance.new("UICorner")
-DropButton2.Name = "DropButton"
-DropButton2.Parent = Teleport
-DropButton2.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DropButton2.BorderSizePixel = 0
-DropButton2.ClipsDescendants = true
-DropButton2.Position = UDim2.new(0.0204359666, 0, 0.0790190771, 0)
-DropButton2.Size = UDim2.new(0, 387, 0, 33)
-DropButton2.AutoButtonColor = false
-DropButton2.Font = Enum.Font.SourceSansBold
-DropButton2.Text = "Select Location"
-DropButton2.TextColor3 = Color3.fromRGB(255, 255, 255)
-DropButton2.TextSize = 13
-DropButton2.TextTransparency = 1
-UIDrop4.CornerRadius = UDim.new(0, 3)
-UIDrop4.Name = "UIDrop"
-UIDrop4.Parent = DropButton2
-BoxDrop2.Name = "BoxDrop"
-BoxDrop2.Parent = DropButton2
-BoxDrop2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-BoxDrop2.BackgroundTransparency = 1
-BoxDrop2.BorderColor3 = Color3.fromRGB(27, 42, 53)
-BoxDrop2.BorderSizePixel = 0
-BoxDrop2.Size = UDim2.new(0, 335, 0, 33)
-BoxDrop2.Font = Enum.Font.SourceSansBold
-BoxDrop2.Text = "Select Location"
-BoxDrop2.TextColor3 = Color3.fromRGB(255, 255, 255)
-BoxDrop2.TextSize = 13
-BoxDrop2.TextXAlignment = Enum.TextXAlignment.Left
-UIDrop5.Name = "UIDrop"
-UIDrop5.Parent = BoxDrop2
-UIDrop5.PaddingLeft = UDim.new(0, 6)
-Icon6.Name = "Icon"
-Icon6.Parent = DropButton2
-Icon6.BackgroundTransparency = 1
-Icon6.BorderSizePixel = 0
-Icon6.ClipsDescendants = true
-Icon6.Position = UDim2.new(0.93, 0, 0.151, 0)
-Icon6.Rotation = 0
-Icon6.Size = UDim2.new(0, 23, 0, 22)
-Icon6.ZIndex = 1
-Icon6.Image = "rbxassetid://117983917327514"
-Icon6.SliceCenter = Rect.new(2, 2, 298, 298)
-Icon6.ImageColor3 = Color3.fromRGB(255, 255, 255)
-DropHolder2.Name = "DropHolder"
-DropHolder2.Parent = Teleport
-DropHolder2.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-DropHolder2.BorderSizePixel = 0
-DropHolder2.ClipsDescendants = true
-DropHolder2.Position = UDim2.new(0.0204359666, 0, 0.398406386, 0)
-DropHolder2.Size = UDim2.new(0, 387, 0, 0)
-DropHolder2.Visible = false
-ScrollingFrame11.Name = "ScrollingFrame"
-ScrollingFrame11.Parent = DropHolder2
-ScrollingFrame11.Active = true
-ScrollingFrame11.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-ScrollingFrame11.BorderSizePixel = 0
-ScrollingFrame11.Position = UDim2.new(0, 0, 0.0413798429, 0)
-ScrollingFrame11.Size = UDim2.new(0, 387, 0, 146)
-ScrollingFrame11.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollingFrame11.ScrollBarThickness = 0
-UIListLayout12.Name = "UIListLayout"
-UIListLayout12.Parent = ScrollingFrame11
-UIListLayout12.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout12.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout12.Padding = UDim.new(0, 5)
-UIDrop6.CornerRadius = UDim.new(0, 3)
-UIDrop6.Name = "UIDrop"
-UIDrop6.Parent = DropHolder2
-local changedSignal8 = BoxDrop2:GetPropertyChangedSignal("Text")
-
-changedSignal8:connect(function()
-	BoxDrop2.TextXAlignment = Enum.TextXAlignment.Left
-end)
-
-local changedSignal9 = BoxDrop2:GetPropertyChangedSignal("Text")
-
-changedSignal9:Connect(function()
-end)
-
-BoxDrop2.Focused:Connect(function()
-	DropHolder2.Visible = true
-	local tween48 = TweenService:Create(Icon6, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = -90 })
-	tween48:Play()
-	DropHolder2:TweenSize(UDim2.new(0, 387, 0, 160), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	ScrollingFrame11:GetChildren()
-
-	for _, textButton in ipairs({
-		DB18, DB19, DB20, DB21, DB22, DB23, DB24, DB25, DB26, DB27, DB28, DB29, DB30, DB31, DB32,
-		DB33, DB34,
-	}) do
-		textButton.Visible = true
+	if now - state.lastClick >= CONFIG.clickDelay then
+		state.lastClick = now
+		clickScreen()
 	end
-end)
 
-BoxDrop2.FocusLost:Connect(function(enterPressed2, inputObject2)
-end)
-
-Icon6.MouseButton1Click:Connect(function()
-	local tween49 = TweenService:Create(Icon6, TweenInfo.new(0.1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { Rotation = 0 })
-	tween49:Play()
-	DropHolder2:TweenSize(UDim2.new(0, 387, 0, 0), "Out", "Sine", 0.3, false)
-	task.wait(0.15)
-	DropHolder2.Visible = false
-	ScrollingFrame11:GetChildren()
-
-	for _, textButton in ipairs({
-		DB18, DB19, DB20, DB21, DB22, DB23, DB24, DB25, DB26, DB27, DB28, DB29, DB30, DB31, DB32,
-		DB33, DB34,
-	}) do
-		textButton.Visible = true
+	if now - state.lastSwing < CONFIG.swingDelay then
+		return
 	end
-end)
-
-local changedSignal10 = UIListLayout12:GetPropertyChangedSignal("AbsoluteContentSize")
-
-changedSignal10:Connect(function()
-	ScrollingFrame11.CanvasSize = UDim2.new(0, 0, 0, 0)
-end)
-
-ScrollingFrame11:GetChildren()
-local DB18 = Instance.new("TextButton")
-local UI18 = Instance.new("UICorner")
-DB18.Name = "DB"
-DB18.Parent = ScrollingFrame11
-DB18.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB18.BorderSizePixel = 0
-DB18.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB18.Size = UDim2.new(0, 369, 0, 33)
-DB18.AutoButtonColor = false
-DB18.Font = Enum.Font.SourceSansBold
-DB18.Text = "Sunflower"
-DB18.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB18.TextSize = 13
-UI18.CornerRadius = UDim.new(0, 3)
-UI18.Name = "UI"
-UI18.Parent = DB18
-
-DB18.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB19 = Instance.new("TextButton")
-local UI19 = Instance.new("UICorner")
-DB19.Name = "DB"
-DB19.Parent = ScrollingFrame11
-DB19.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB19.BorderSizePixel = 0
-DB19.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB19.Size = UDim2.new(0, 369, 0, 33)
-DB19.AutoButtonColor = false
-DB19.Font = Enum.Font.SourceSansBold
-DB19.Text = "Dandelion"
-DB19.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB19.TextSize = 13
-UI19.CornerRadius = UDim.new(0, 3)
-UI19.Name = "UI"
-UI19.Parent = DB19
-
-DB19.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB20 = Instance.new("TextButton")
-local UI20 = Instance.new("UICorner")
-DB20.Name = "DB"
-DB20.Parent = ScrollingFrame11
-DB20.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB20.BorderSizePixel = 0
-DB20.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB20.Size = UDim2.new(0, 369, 0, 33)
-DB20.AutoButtonColor = false
-DB20.Font = Enum.Font.SourceSansBold
-DB20.Text = "Mushroom"
-DB20.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB20.TextSize = 13
-UI20.CornerRadius = UDim.new(0, 3)
-UI20.Name = "UI"
-UI20.Parent = DB20
-
-DB20.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB21 = Instance.new("TextButton")
-local UI21 = Instance.new("UICorner")
-DB21.Name = "DB"
-DB21.Parent = ScrollingFrame11
-DB21.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB21.BorderSizePixel = 0
-DB21.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB21.Size = UDim2.new(0, 369, 0, 33)
-DB21.AutoButtonColor = false
-DB21.Font = Enum.Font.SourceSansBold
-DB21.Text = "Blue_Flower"
-DB21.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB21.TextSize = 13
-UI21.CornerRadius = UDim.new(0, 3)
-UI21.Name = "UI"
-UI21.Parent = DB21
-
-DB21.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB22 = Instance.new("TextButton")
-local UI22 = Instance.new("UICorner")
-DB22.Name = "DB"
-DB22.Parent = ScrollingFrame11
-DB22.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB22.BorderSizePixel = 0
-DB22.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB22.Size = UDim2.new(0, 369, 0, 33)
-DB22.AutoButtonColor = false
-DB22.Font = Enum.Font.SourceSansBold
-DB22.Text = "Clover"
-DB22.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB22.TextSize = 13
-UI22.CornerRadius = UDim.new(0, 3)
-UI22.Name = "UI"
-UI22.Parent = DB22
-
-DB22.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB23 = Instance.new("TextButton")
-local UI23 = Instance.new("UICorner")
-DB23.Name = "DB"
-DB23.Parent = ScrollingFrame11
-DB23.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB23.BorderSizePixel = 0
-DB23.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB23.Size = UDim2.new(0, 369, 0, 33)
-DB23.AutoButtonColor = false
-DB23.Font = Enum.Font.SourceSansBold
-DB23.Text = "Spider"
-DB23.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB23.TextSize = 13
-UI23.CornerRadius = UDim.new(0, 3)
-UI23.Name = "UI"
-UI23.Parent = DB23
-
-DB23.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB24 = Instance.new("TextButton")
-local UI24 = Instance.new("UICorner")
-DB24.Name = "DB"
-DB24.Parent = ScrollingFrame11
-DB24.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB24.BorderSizePixel = 0
-DB24.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB24.Size = UDim2.new(0, 369, 0, 33)
-DB24.AutoButtonColor = false
-DB24.Font = Enum.Font.SourceSansBold
-DB24.Text = "Strawberry"
-DB24.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB24.TextSize = 13
-UI24.CornerRadius = UDim.new(0, 3)
-UI24.Name = "UI"
-UI24.Parent = DB24
-
-DB24.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB25 = Instance.new("TextButton")
-local UI25 = Instance.new("UICorner")
-DB25.Name = "DB"
-DB25.Parent = ScrollingFrame11
-DB25.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB25.BorderSizePixel = 0
-DB25.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB25.Size = UDim2.new(0, 369, 0, 33)
-DB25.AutoButtonColor = false
-DB25.Font = Enum.Font.SourceSansBold
-DB25.Text = "Bamboo"
-DB25.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB25.TextSize = 13
-UI25.CornerRadius = UDim.new(0, 3)
-UI25.Name = "UI"
-UI25.Parent = DB25
-
-DB25.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB26 = Instance.new("TextButton")
-local UI26 = Instance.new("UICorner")
-DB26.Name = "DB"
-DB26.Parent = ScrollingFrame11
-DB26.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB26.BorderSizePixel = 0
-DB26.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB26.Size = UDim2.new(0, 369, 0, 33)
-DB26.AutoButtonColor = false
-DB26.Font = Enum.Font.SourceSansBold
-DB26.Text = "Pineapple"
-DB26.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB26.TextSize = 13
-UI26.CornerRadius = UDim.new(0, 3)
-UI26.Name = "UI"
-UI26.Parent = DB26
-
-DB26.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB27 = Instance.new("TextButton")
-local UI27 = Instance.new("UICorner")
-DB27.Name = "DB"
-DB27.Parent = ScrollingFrame11
-DB27.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB27.BorderSizePixel = 0
-DB27.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB27.Size = UDim2.new(0, 369, 0, 33)
-DB27.AutoButtonColor = false
-DB27.Font = Enum.Font.SourceSansBold
-DB27.Text = "Stump"
-DB27.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB27.TextSize = 13
-UI27.CornerRadius = UDim.new(0, 3)
-UI27.Name = "UI"
-UI27.Parent = DB27
-
-DB27.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB28 = Instance.new("TextButton")
-local UI28 = Instance.new("UICorner")
-DB28.Name = "DB"
-DB28.Parent = ScrollingFrame11
-DB28.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB28.BorderSizePixel = 0
-DB28.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB28.Size = UDim2.new(0, 369, 0, 33)
-DB28.AutoButtonColor = false
-DB28.Font = Enum.Font.SourceSansBold
-DB28.Text = "Pumpkin"
-DB28.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB28.TextSize = 13
-UI28.CornerRadius = UDim.new(0, 3)
-UI28.Name = "UI"
-UI28.Parent = DB28
-
-DB28.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB29 = Instance.new("TextButton")
-local UI29 = Instance.new("UICorner")
-DB29.Name = "DB"
-DB29.Parent = ScrollingFrame11
-DB29.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB29.BorderSizePixel = 0
-DB29.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB29.Size = UDim2.new(0, 369, 0, 33)
-DB29.AutoButtonColor = false
-DB29.Font = Enum.Font.SourceSansBold
-DB29.Text = "Cactus"
-DB29.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB29.TextSize = 13
-UI29.CornerRadius = UDim.new(0, 3)
-UI29.Name = "UI"
-UI29.Parent = DB29
-
-DB29.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB30 = Instance.new("TextButton")
-local UI30 = Instance.new("UICorner")
-DB30.Name = "DB"
-DB30.Parent = ScrollingFrame11
-DB30.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB30.BorderSizePixel = 0
-DB30.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB30.Size = UDim2.new(0, 369, 0, 33)
-DB30.AutoButtonColor = false
-DB30.Font = Enum.Font.SourceSansBold
-DB30.Text = "Rose"
-DB30.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB30.TextSize = 13
-UI30.CornerRadius = UDim.new(0, 3)
-UI30.Name = "UI"
-UI30.Parent = DB30
-
-DB30.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB31 = Instance.new("TextButton")
-local UI31 = Instance.new("UICorner")
-DB31.Name = "DB"
-DB31.Parent = ScrollingFrame11
-DB31.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB31.BorderSizePixel = 0
-DB31.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB31.Size = UDim2.new(0, 369, 0, 33)
-DB31.AutoButtonColor = false
-DB31.Font = Enum.Font.SourceSansBold
-DB31.Text = "PineTreeForest"
-DB31.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB31.TextSize = 13
-UI31.CornerRadius = UDim.new(0, 3)
-UI31.Name = "UI"
-UI31.Parent = DB31
-
-DB31.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB32 = Instance.new("TextButton")
-local UI32 = Instance.new("UICorner")
-DB32.Name = "DB"
-DB32.Parent = ScrollingFrame11
-DB32.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB32.BorderSizePixel = 0
-DB32.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB32.Size = UDim2.new(0, 369, 0, 33)
-DB32.AutoButtonColor = false
-DB32.Font = Enum.Font.SourceSansBold
-DB32.Text = "Mountain"
-DB32.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB32.TextSize = 13
-UI32.CornerRadius = UDim.new(0, 3)
-UI32.Name = "UI"
-UI32.Parent = DB32
-
-DB32.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB33 = Instance.new("TextButton")
-local UI33 = Instance.new("UICorner")
-DB33.Name = "DB"
-DB33.Parent = ScrollingFrame11
-DB33.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB33.BorderSizePixel = 0
-DB33.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB33.Size = UDim2.new(0, 369, 0, 33)
-DB33.AutoButtonColor = false
-DB33.Font = Enum.Font.SourceSansBold
-DB33.Text = "Coconut"
-DB33.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB33.TextSize = 13
-UI33.CornerRadius = UDim.new(0, 3)
-UI33.Name = "UI"
-UI33.Parent = DB33
-
-DB33.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local DB34 = Instance.new("TextButton")
-local UI34 = Instance.new("UICorner")
-DB34.Name = "DB"
-DB34.Parent = ScrollingFrame11
-DB34.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-DB34.BorderSizePixel = 0
-DB34.Position = UDim2.new(0.00997150969, 0, 0, 0)
-DB34.Size = UDim2.new(0, 369, 0, 33)
-DB34.AutoButtonColor = false
-DB34.Font = Enum.Font.SourceSansBold
-DB34.Text = "Pepper"
-DB34.TextColor3 = Color3.fromRGB(255, 255, 255)
-DB34.TextSize = 13
-UI34.CornerRadius = UDim.new(0, 3)
-UI34.Name = "UI"
-UI34.Parent = DB34
-
-DB34.MouseButton1Click:Connect(function()
-	-- [envlog] error: Script:1: attempt to index function with 'TextBox'
-end)
-
-local TextBox7 = Instance.new("TextLabel")
-local UICorner62 = Instance.new("UICorner")
-TextBox7.Name = "TextBox"
-TextBox7.Parent = Teleport
-TextBox7.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-TextBox7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextBox7.BorderSizePixel = 0
-TextBox7.Position = UDim2.new(0.0314769968, 0, 0.0761904791, 0)
-TextBox7.Size = UDim2.new(0, 387, 0, 24)
-TextBox7.Font = Enum.Font.SourceSansBold
-TextBox7.Text = "Location: Sunflower"
-TextBox7.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextBox7.TextSize = 14
-TextBox7.TextWrapped = true
-UICorner62.CornerRadius = UDim.new(0, 3)
-UICorner62.Parent = TextBox7
-local TextButton47 = Instance.new("TextButton")
-local UICorner63 = Instance.new("UICorner")
-TextButton47.Parent = Teleport
-TextButton47.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-TextButton47.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton47.BorderSizePixel = 0
-TextButton47.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-TextButton47.Size = UDim2.new(0, 387, 0, 33)
-TextButton47.AutoButtonColor = false
-TextButton47.Font = Enum.Font.SourceSansBold
-TextButton47.Text = "Teleport to Selected Location"
-TextButton47.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton47.TextSize = 14
-UICorner63.CornerRadius = UDim.new(0, 3)
-UICorner63.Parent = TextButton47
-
-TextButton47.MouseButton1Click:Connect(function()
-	local tween50 = TweenService:Create(TextButton47, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(0, 106, 255) })
-
-	tween50.Completed:Connect(function(playbackState15)
-	end)
-
-	tween50:Play()
-	task.wait(0.1)
-	local tween51 = TweenService:Create(TextButton47, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(22, 22, 27) })
-
-	tween51.Completed:Connect(function(playbackState16)
-	end)
-
-	tween51:Play()
-	game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-	local tween52 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(2, Enum.EasingStyle.Linear), { CFrame = CFrame.new(Vector3.new(-488.42440795898438, 123.648681640625, 535.53216552734375)) })
-	tween52:Play()
-	tween52.Completed:Wait()
-end)
-
-local Section8 = Instance.new("TextLabel")
-local TextLiner8 = Instance.new("Frame")
-Section8.Name = "Section"
-Section8.Parent = Teleport
-Section8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section8.BackgroundTransparency = 1
-Section8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section8.BorderSizePixel = 0
-Section8.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section8.Size = UDim2.new(0, 381, 0, 18)
-Section8.Font = Enum.Font.SourceSansBold
-Section8.Text = "Your Hive"
-Section8.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section8.TextSize = 14
-Section8.TextWrapped = true
-Section8.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner8.Name = "TextLiner"
-TextLiner8.Parent = Section8
-TextLiner8.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner8.BorderSizePixel = 0
-TextLiner8.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner8.Size = UDim2.new(0, 44, 0, 2)
-local TextButton48 = Instance.new("TextButton")
-local UICorner64 = Instance.new("UICorner")
-TextButton48.Parent = Teleport
-TextButton48.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-TextButton48.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton48.BorderSizePixel = 0
-TextButton48.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-TextButton48.Size = UDim2.new(0, 387, 0, 33)
-TextButton48.AutoButtonColor = false
-TextButton48.Font = Enum.Font.SourceSansBold
-TextButton48.Text = "Teleport to Hive"
-TextButton48.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton48.TextSize = 14
-UICorner64.CornerRadius = UDim.new(0, 3)
-UICorner64.Parent = TextButton48
-
-TextButton48.MouseButton1Click:Connect(function()
-	local tween53 = TweenService:Create(TextButton48, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(0, 106, 255) })
-
-	tween53.Completed:Connect(function(playbackState17)
-	end)
-
-	tween53:Play()
-	task.wait(0.1)
-	local tween54 = TweenService:Create(TextButton48, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(22, 22, 27) })
-
-	tween54.Completed:Connect(function(playbackState18)
-	end)
-
-	tween54:Play()
-	game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-	local tween55 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(2, Enum.EasingStyle.Linear), { CFrame = CFrame.new(Vector3.new(0, 0, 0)) })
-	tween55:Play()
-	tween55.Completed:Wait()
-end)
-
-local Icon7 = Instance.new("ImageLabel")
-local TextButton49 = Instance.new("TextButton")
-local TextLabel21 = Instance.new("TextLabel")
-local Items = Instance.new("ScrollingFrame")
-local UIPadding7 = Instance.new("UIPadding")
-local UIListLayout8 = Instance.new("UIListLayout")
-Icon7.Name = "Icon"
-Icon7.Parent = ButtonsHolder
-Icon7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Icon7.BackgroundTransparency = 1
-Icon7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Icon7.BorderSizePixel = 0
-Icon7.Size = UDim2.new(0, 20, 0, 20)
-Icon7.Image = "rbxassetid://6034941708"
-Icon7.ImageColor3 = Color3.fromRGB(200, 200, 200)
-TextButton49.Parent = Icon7
-TextButton49.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton49.BackgroundTransparency = 1
-TextButton49.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton49.BorderSizePixel = 0
-TextButton49.Size = UDim2.new(0, 115, 0, 20)
-TextButton49.AutoButtonColor = false
-TextButton49.Font = Enum.Font.SourceSans
-TextButton49.Text = ""
-TextButton49.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton49.TextSize = 14
-TextButton49.TextTransparency = 1
-TextLabel21.Parent = Icon7
-TextLabel21.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel21.BackgroundTransparency = 1
-TextLabel21.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel21.BorderSizePixel = 0
-TextLabel21.Position = UDim2.new(1.40379024, 0, 0, 0)
-TextLabel21.Size = UDim2.new(0, 85, 0, 20)
-TextLabel21.Font = Enum.Font.SourceSansBold
-TextLabel21.Text = "Items"
-TextLabel21.TextColor3 = Color3.fromRGB(200, 200, 200)
-TextLabel21.TextSize = 14
-TextLabel21.TextXAlignment = Enum.TextXAlignment.Left
-Items.Name = "Items"
-Items.Parent = TabName
-Items.Active = true
-Items.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Items.BackgroundTransparency = 1
-Items.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Items.BorderSizePixel = 0
-Items.Size = UDim2.new(0, 413, 0, 320)
-Items.Visible = false
-Items.ScrollBarThickness = 2
-UIPadding7.Parent = Items
-UIPadding7.PaddingTop = UDim.new(0, 5)
-UIListLayout8.Parent = Items
-UIListLayout8.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout8.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout8.Padding = UDim.new(0, 6)
-local changedSignal11 = UIListLayout8:GetPropertyChangedSignal("AbsoluteContentSize")
-
-changedSignal11:Connect(function()
-	Items.CanvasSize = UDim2.new(0, 0, 0, 8)
-end)
-
-TextButton49.MouseEnter:Connect(function()
-	local tween56 = TweenService:Create(TextLabel21, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween56.Completed:Connect(function(playbackState19)
-	end)
-
-	tween56:Play()
-	local tween57 = TweenService:Create(Icon7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween57.Completed:Connect(function(playbackState20)
-	end)
-
-	tween57:Play()
-end)
-
-TextButton49.MouseLeave:Connect(function()
-	local tween58 = TweenService:Create(TextLabel21, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween58.Completed:Connect(function(playbackState21)
-	end)
-
-	tween58:Play()
-	local tween59 = TweenService:Create(Icon7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween59.Completed:Connect(function(playbackState22)
-	end)
-
-	tween59:Play()
-end)
-
-UserInputService.InputBegan:Connect(function(input7, gameProcessed7)
-end)
-
-local Section9 = Instance.new("TextLabel")
-local TextLiner9 = Instance.new("Frame")
-Section9.Name = "Section"
-Section9.Parent = Items
-Section9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section9.BackgroundTransparency = 1
-Section9.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section9.BorderSizePixel = 0
-Section9.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section9.Size = UDim2.new(0, 381, 0, 18)
-Section9.Font = Enum.Font.SourceSansBold
-Section9.Text = "Items"
-Section9.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section9.TextSize = 14
-Section9.TextWrapped = true
-Section9.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner9.Name = "TextLiner"
-TextLiner9.Parent = Section9
-TextLiner9.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner9.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner9.BorderSizePixel = 0
-TextLiner9.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner9.Size = UDim2.new(0, 44, 0, 2)
-
-for _, item in ipairs({
-	{ text = "Use All Buffs [Blue Pollen]", text2 = "Blue Extract" },
-	{ text = "Use All Buffs [Red Pollen]", text2 = "Red Extract" },
-}) do
-	local TextButton50 = Instance.new("TextButton")
-	local UICorner65 = Instance.new("UICorner")
-	TextButton50.Parent = Items
-	TextButton50.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-	TextButton50.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TextButton50.BorderSizePixel = 0
-	TextButton50.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-	TextButton50.Size = UDim2.new(0, 387, 0, 33)
-	TextButton50.AutoButtonColor = false
-	TextButton50.Font = Enum.Font.SourceSansBold
-	TextButton50.Text = item.text
-	TextButton50.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TextButton50.TextSize = 14
-	UICorner65.CornerRadius = UDim.new(0, 3)
-	UICorner65.Parent = TextButton50
-
-	TextButton50.MouseButton1Click:Connect(function()
-		local tween60 = TweenService:Create(TextButton50, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(0, 106, 255) })
-
-		tween60.Completed:Connect(function(playbackState23)
+	state.lastSwing = now
+
+	local character = player.Character
+	if not character then
+		return
+	end
+
+	local tool = character:FindFirstChildOfClass("Tool")
+	if not tool then
+		local backpack = player:FindFirstChildOfClass("Backpack")
+		local candidate = backpack and backpack:FindFirstChildOfClass("Tool")
+		local humanoid = character:FindFirstChildOfClass("Humanoid")
+		if candidate and humanoid then
+			humanoid:EquipTool(candidate)
+			tool = candidate
+		end
+	end
+
+	if tool then
+		pcall(function()
+			tool:Activate()
 		end)
+	end
+end
 
-		tween60:Play()
-		task.wait(0.1)
-		local tween61 = TweenService:Create(TextButton50, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(22, 22, 27) })
+local function hivePosition()
+	if state.hiveOverride then
+		return state.hiveOverride
+	end
 
-		tween61.Completed:Connect(function(playbackState24)
-		end)
+	local spawnPos = player:FindFirstChild("SpawnPos")
+	if spawnPos then
+		local value = spawnPos.Value
+		if typeof(value) == "Instance" and value:IsA("BasePart") then
+			return value.Position
+		end
+		if typeof(value) == "Vector3" then
+			return value
+		end
+	end
 
-		tween61:Play()
+	local honeycombs = workspace:FindFirstChild("Honeycombs")
+	if honeycombs then
+		for _, hive in ipairs(honeycombs:GetChildren()) do
+			local owner = hive:FindFirstChild("Owner")
+			if (owner and owner:IsA("ObjectValue") and owner.Value == player) or hive.Name == player.Name then
+				if hive:IsA("BasePart") then
+					return hive.Position
+				end
+				if hive:IsA("Model") then
+					return hive:GetPivot().Position
+				end
+			end
+		end
+	end
 
-		for _, name in ipairs({
-			item.text2, "Glitter", "Glue", "Oil", "Enzymes",
-		}) do
-			ReplicatedStorage.Events.PlayerActivesCommand:FireServer({ Name = name })
-			wait(0.01)
+	return nil
+end
+
+-- Conversion: stand on the hive, fire PlayerHiveCommand("ToggleHoneyMaking"),
+-- then wait for pollen to empty. A second command is only sent if nothing
+-- happens for 12 seconds, so the toggle is not flipped off by accident.
+local function convert()
+	if state.converting then
+		return
+	end
+
+	local position = hivePosition()
+	if not position then
+		setStatus("No hive found")
+		state.lastConvert = os.clock()
+		return
+	end
+
+	state.converting = true
+	setStatus("Converting")
+	relocate(position + Vector3.new(0, 3, 0), 45)
+
+	fireEvent("PlayerHiveCommand", "ToggleHoneyMaking")
+
+	local started = os.clock()
+	local lastProgress = started
+	local lastSeen = getPollen() or math.huge
+
+	while state.alive and state.converting and os.clock() - started < CONFIG.convertTimeout do
+		task.wait(0.3)
+
+		local pollen = getPollen()
+		if pollen then
+			if pollen <= 1 then
+				break
+			end
+			if pollen < lastSeen then
+				lastSeen = pollen
+				lastProgress = os.clock()
+			end
 		end
 
-		ReplicatedStorage.Events.PlayerActivesCommand:FireServer({ Name = "Tropical TDrink" })
-	end)
-end
-
-for _, item in ipairs({
-	{ text = "Use Blue Extract", name = "Blue Extract" },
-	{ text = "Use Red Extract", name = "Red Extract" },
-	{ text = "Use Glitter", name = "Glitter" },
-	{ text = "Use Glue", name = "Glue" },
-	{ text = "Use Oil", name = "Oil" },
-	{ text = "Use Enzymes", name = "Enzymes" },
-	{ text = "Use Tropical Drink", name = "Tropical Drink" },
-	{ text = "Use Purple Potion", name = "Purple Potion" },
-	{ text = "Use Super Smoothie", name = "Super Smoothie" },
-	{ text = "Use Marshmallow Bee", name = "Marshmallow Bee" },
-}) do
-	local TextButton52 = Instance.new("TextButton")
-	local UICorner67 = Instance.new("UICorner")
-	TextButton52.Parent = Items
-	TextButton52.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-	TextButton52.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TextButton52.BorderSizePixel = 0
-	TextButton52.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-	TextButton52.Size = UDim2.new(0, 387, 0, 33)
-	TextButton52.AutoButtonColor = false
-	TextButton52.Font = Enum.Font.SourceSansBold
-	TextButton52.Text = item.text
-	TextButton52.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TextButton52.TextSize = 14
-	UICorner67.CornerRadius = UDim.new(0, 3)
-	UICorner67.Parent = TextButton52
-
-	TextButton52.MouseButton1Click:Connect(function()
-		local tween64 = TweenService:Create(TextButton52, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(0, 106, 255) })
-
-		tween64.Completed:Connect(function(playbackState27)
-		end)
-
-		tween64:Play()
-		task.wait(0.1)
-		local tween65 = TweenService:Create(TextButton52, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(22, 22, 27) })
-
-		tween65.Completed:Connect(function(playbackState28)
-		end)
-
-		tween65:Play()
-		ReplicatedStorage.Events.PlayerActivesCommand:FireServer({ Name = item.name })
-	end)
-end
-
-local Section10 = Instance.new("TextLabel")
-local TextLiner10 = Instance.new("Frame")
-Section10.Name = "Section"
-Section10.Parent = Items
-Section10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section10.BackgroundTransparency = 1
-Section10.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section10.BorderSizePixel = 0
-Section10.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section10.Size = UDim2.new(0, 381, 0, 18)
-Section10.Font = Enum.Font.SourceSansBold
-Section10.Text = "Dispensers"
-Section10.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section10.TextSize = 14
-Section10.TextWrapped = true
-Section10.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner10.Name = "TextLiner"
-TextLiner10.Parent = Section10
-TextLiner10.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner10.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner10.BorderSizePixel = 0
-TextLiner10.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner10.Size = UDim2.new(0, 44, 0, 2)
-local TextButton62 = Instance.new("TextButton")
-local UICorner77 = Instance.new("UICorner")
-TextButton62.Parent = Items
-TextButton62.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-TextButton62.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton62.BorderSizePixel = 0
-TextButton62.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-TextButton62.Size = UDim2.new(0, 387, 0, 33)
-TextButton62.AutoButtonColor = false
-TextButton62.Font = Enum.Font.SourceSansBold
-TextButton62.Text = "Use All Dispenserse"
-TextButton62.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton62.TextSize = 14
-UICorner77.CornerRadius = UDim.new(0, 3)
-UICorner77.Parent = TextButton62
-
-TextButton62.MouseButton1Click:Connect(function()
-	local tween84 = TweenService:Create(TextButton62, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(0, 106, 255) })
-
-	tween84.Completed:Connect(function(playbackState47)
-	end)
-
-	tween84:Play()
-	task.wait(0.1)
-	local tween85 = TweenService:Create(TextButton62, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { BackgroundColor3 = Color3.fromRGB(22, 22, 27) })
-
-	tween85.Completed:Connect(function(playbackState48)
-	end)
-
-	tween85:Play()
-
-	for _, text in ipairs({
-		"Glue Dispenser", "Wealth Clock", "Coconut Dispenser", "Strawberry Dispenser",
-		"Treat Dispenser", "Free Ant Pass Dispenser", "Blueberry Dispenser", "Honey Dispenser",
-	}) do
-		ReplicatedStorage.Events.ToyEvent:FireServer(text)
-		wait(0.01)
+		if os.clock() - lastProgress > 12 then
+			fireEvent("PlayerHiveCommand", "ToggleHoneyMaking")
+			lastProgress = os.clock()
+		end
 	end
 
-	ReplicatedStorage.Events.ToyEvent:FireServer("Free Royal Jelly Dispenser")
-end)
-
-local Icon8 = Instance.new("ImageLabel")
-local TextButton63 = Instance.new("TextButton")
-local TextLabel24 = Instance.new("TextLabel")
-local Combat = Instance.new("ScrollingFrame")
-local UIPadding8 = Instance.new("UIPadding")
-local UIListLayout9 = Instance.new("UIListLayout")
-Icon8.Name = "Icon"
-Icon8.Parent = ButtonsHolder
-Icon8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Icon8.BackgroundTransparency = 1
-Icon8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Icon8.BorderSizePixel = 0
-Icon8.Size = UDim2.new(0, 20, 0, 20)
-Icon8.Image = "rbxassetid://6034287525"
-Icon8.ImageColor3 = Color3.fromRGB(200, 200, 200)
-TextButton63.Parent = Icon8
-TextButton63.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton63.BackgroundTransparency = 1
-TextButton63.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton63.BorderSizePixel = 0
-TextButton63.Size = UDim2.new(0, 115, 0, 20)
-TextButton63.AutoButtonColor = false
-TextButton63.Font = Enum.Font.SourceSans
-TextButton63.Text = ""
-TextButton63.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton63.TextSize = 14
-TextButton63.TextTransparency = 1
-TextLabel24.Parent = Icon8
-TextLabel24.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel24.BackgroundTransparency = 1
-TextLabel24.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel24.BorderSizePixel = 0
-TextLabel24.Position = UDim2.new(1.40379024, 0, 0, 0)
-TextLabel24.Size = UDim2.new(0, 85, 0, 20)
-TextLabel24.Font = Enum.Font.SourceSansBold
-TextLabel24.Text = "Combat"
-TextLabel24.TextColor3 = Color3.fromRGB(200, 200, 200)
-TextLabel24.TextSize = 14
-TextLabel24.TextXAlignment = Enum.TextXAlignment.Left
-Combat.Name = "Combat"
-Combat.Parent = TabName
-Combat.Active = true
-Combat.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Combat.BackgroundTransparency = 1
-Combat.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Combat.BorderSizePixel = 0
-Combat.Size = UDim2.new(0, 413, 0, 320)
-Combat.Visible = false
-Combat.ScrollBarThickness = 2
-UIPadding8.Parent = Combat
-UIPadding8.PaddingTop = UDim.new(0, 5)
-UIListLayout9.Parent = Combat
-UIListLayout9.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout9.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout9.Padding = UDim.new(0, 6)
-local changedSignal12 = UIListLayout9:GetPropertyChangedSignal("AbsoluteContentSize")
-
-changedSignal12:Connect(function()
-	Combat.CanvasSize = UDim2.new(0, 0, 0, 8)
-end)
-
-TextButton63.MouseEnter:Connect(function()
-	local tween86 = TweenService:Create(TextLabel24, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween86.Completed:Connect(function(playbackState49)
-	end)
-
-	tween86:Play()
-	local tween87 = TweenService:Create(Icon8, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween87.Completed:Connect(function(playbackState50)
-	end)
-
-	tween87:Play()
-end)
-
-TextButton63.MouseLeave:Connect(function()
-	local tween88 = TweenService:Create(TextLabel24, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween88.Completed:Connect(function(playbackState51)
-	end)
-
-	tween88:Play()
-	local tween89 = TweenService:Create(Icon8, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween89.Completed:Connect(function(playbackState52)
-	end)
-
-	tween89:Play()
-end)
-
-UserInputService.InputBegan:Connect(function(input8, gameProcessed8)
-end)
-
-local Section11 = Instance.new("TextLabel")
-local TextLiner11 = Instance.new("Frame")
-Section11.Name = "Section"
-Section11.Parent = Combat
-Section11.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section11.BackgroundTransparency = 1
-Section11.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section11.BorderSizePixel = 0
-Section11.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section11.Size = UDim2.new(0, 381, 0, 18)
-Section11.Font = Enum.Font.SourceSansBold
-Section11.Text = "Combat"
-Section11.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section11.TextSize = 14
-Section11.TextWrapped = true
-Section11.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner11.Name = "TextLiner"
-TextLiner11.Parent = Section11
-TextLiner11.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner11.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner11.BorderSizePixel = 0
-TextLiner11.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner11.Size = UDim2.new(0, 44, 0, 2)
-local Toggle6 = Instance.new("TextButton")
-local UICToggle6 = Instance.new("UICorner")
-local TextToggle6 = Instance.new("TextLabel")
-local BackToggle6 = Instance.new("Frame")
-local UIC16 = Instance.new("UICorner")
-local InToggle6 = Instance.new("Frame")
-local UIC26 = Instance.new("UICorner")
-Toggle6.Name = "Toggle"
-Toggle6.Parent = Combat
-Toggle6.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle6.BorderSizePixel = 0
-Toggle6.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle6.Size = UDim2.new(0, 387, 0, 33)
-Toggle6.AutoButtonColor = false
-Toggle6.Font = Enum.Font.SourceSansBold
-Toggle6.Text = ""
-Toggle6.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle6.TextSize = 14
-UICToggle6.CornerRadius = UDim.new(0, 3)
-UICToggle6.Name = "UICToggle"
-UICToggle6.Parent = Toggle6
-TextToggle6.Name = "TextToggle"
-TextToggle6.Parent = Toggle6
-TextToggle6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle6.BackgroundTransparency = 1
-TextToggle6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle6.BorderSizePixel = 0
-TextToggle6.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle6.Size = UDim2.new(0, 200, 0, 18)
-TextToggle6.Font = Enum.Font.SourceSansBold
-TextToggle6.Text = "Train Crab"
-TextToggle6.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle6.TextSize = 14
-TextToggle6.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle6.Name = "BackToggle"
-BackToggle6.Parent = Toggle6
-BackToggle6.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle6.BorderSizePixel = 0
-BackToggle6.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle6.Size = UDim2.new(0, 40, 0, 18)
-UIC16.CornerRadius = UDim.new(1, 3)
-UIC16.Name = "UIC1"
-UIC16.Parent = BackToggle6
-InToggle6.Name = "InToggle"
-InToggle6.Parent = BackToggle6
-InToggle6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle6.BorderSizePixel = 0
-InToggle6.Size = UDim2.new(0, 19, 0, 18)
-UIC26.CornerRadius = UDim.new(1, 3)
-UIC26.Name = "UIC2"
-UIC26.Parent = InToggle6
-
-Toggle6.MouseButton1Click:Connect(function()
-	InToggle6:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-	workspace:FindFirstChild("combatcrabpart")
-	combatcrabpart.CanCollide = true
-	game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-	local tween90 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(2, Enum.EasingStyle.Linear), { CFrame = CFrame.new(Vector3.new(-257.52117919921875, 110.61862945556641, 457.867919921875)) })
-	tween90:Play()
-	tween90.Completed:Wait()
-end)
-
-local Toggle7 = Instance.new("TextButton")
-local UICToggle7 = Instance.new("UICorner")
-local TextToggle7 = Instance.new("TextLabel")
-local BackToggle7 = Instance.new("Frame")
-local UIC17 = Instance.new("UICorner")
-local InToggle7 = Instance.new("Frame")
-local UIC27 = Instance.new("UICorner")
-Toggle7.Name = "Toggle"
-Toggle7.Parent = Combat
-Toggle7.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle7.BorderSizePixel = 0
-Toggle7.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle7.Size = UDim2.new(0, 387, 0, 33)
-Toggle7.AutoButtonColor = false
-Toggle7.Font = Enum.Font.SourceSansBold
-Toggle7.Text = ""
-Toggle7.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle7.TextSize = 14
-UICToggle7.CornerRadius = UDim.new(0, 3)
-UICToggle7.Name = "UICToggle"
-UICToggle7.Parent = Toggle7
-TextToggle7.Name = "TextToggle"
-TextToggle7.Parent = Toggle7
-TextToggle7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle7.BackgroundTransparency = 1
-TextToggle7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle7.BorderSizePixel = 0
-TextToggle7.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle7.Size = UDim2.new(0, 200, 0, 18)
-TextToggle7.Font = Enum.Font.SourceSansBold
-TextToggle7.Text = "Train Snail"
-TextToggle7.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle7.TextSize = 14
-TextToggle7.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle7.Name = "BackToggle"
-BackToggle7.Parent = Toggle7
-BackToggle7.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle7.BorderSizePixel = 0
-BackToggle7.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle7.Size = UDim2.new(0, 40, 0, 18)
-UIC17.CornerRadius = UDim.new(1, 3)
-UIC17.Name = "UIC1"
-UIC17.Parent = BackToggle7
-InToggle7.Name = "InToggle"
-InToggle7.Parent = BackToggle7
-InToggle7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle7.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle7.BorderSizePixel = 0
-InToggle7.Size = UDim2.new(0, 19, 0, 18)
-UIC27.CornerRadius = UDim.new(1, 3)
-UIC27.Name = "UIC2"
-UIC27.Parent = InToggle7
-
-Toggle7.MouseButton1Click:Connect(function()
-	InToggle7:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-end)
-
-local Icon9 = Instance.new("ImageLabel")
-local TextButton66 = Instance.new("TextButton")
-local TextLabel28 = Instance.new("TextLabel")
-local Setting = Instance.new("ScrollingFrame")
-local UIPadding9 = Instance.new("UIPadding")
-local UIListLayout10 = Instance.new("UIListLayout")
-Icon9.Name = "Icon"
-Icon9.Parent = ButtonsHolder
-Icon9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Icon9.BackgroundTransparency = 1
-Icon9.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Icon9.BorderSizePixel = 0
-Icon9.Size = UDim2.new(0, 20, 0, 20)
-Icon9.Image = "rbxassetid://6031280882"
-Icon9.ImageColor3 = Color3.fromRGB(200, 200, 200)
-TextButton66.Parent = Icon9
-TextButton66.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton66.BackgroundTransparency = 1
-TextButton66.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton66.BorderSizePixel = 0
-TextButton66.Size = UDim2.new(0, 115, 0, 20)
-TextButton66.AutoButtonColor = false
-TextButton66.Font = Enum.Font.SourceSans
-TextButton66.Text = ""
-TextButton66.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton66.TextSize = 14
-TextButton66.TextTransparency = 1
-TextLabel28.Parent = Icon9
-TextLabel28.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel28.BackgroundTransparency = 1
-TextLabel28.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel28.BorderSizePixel = 0
-TextLabel28.Position = UDim2.new(1.40379024, 0, 0, 0)
-TextLabel28.Size = UDim2.new(0, 85, 0, 20)
-TextLabel28.Font = Enum.Font.SourceSansBold
-TextLabel28.Text = "Setting"
-TextLabel28.TextColor3 = Color3.fromRGB(200, 200, 200)
-TextLabel28.TextSize = 14
-TextLabel28.TextXAlignment = Enum.TextXAlignment.Left
-Setting.Name = "Setting"
-Setting.Parent = TabName
-Setting.Active = true
-Setting.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-Setting.BackgroundTransparency = 1
-Setting.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Setting.BorderSizePixel = 0
-Setting.Size = UDim2.new(0, 413, 0, 320)
-Setting.Visible = false
-Setting.ScrollBarThickness = 2
-UIPadding9.Parent = Setting
-UIPadding9.PaddingTop = UDim.new(0, 5)
-UIListLayout10.Parent = Setting
-UIListLayout10.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIListLayout10.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout10.Padding = UDim.new(0, 6)
-local changedSignal13 = UIListLayout10:GetPropertyChangedSignal("AbsoluteContentSize")
-
-changedSignal13:Connect(function()
-	getgenv().TrainSnail = true
-	Setting.CanvasSize = UDim2.new(0, 0, 0, 8)
-end)
-
-TextButton66.MouseEnter:Connect(function()
-	local tween91 = TweenService:Create(TextLabel28, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween91.Completed:Connect(function(playbackState53)
-	end)
-
-	tween91:Play()
-	local tween92 = TweenService:Create(Icon9, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(255, 255, 255) })
-
-	tween92.Completed:Connect(function(playbackState54)
-	end)
-
-	tween92:Play()
-end)
-
-TextButton66.MouseLeave:Connect(function()
-	local tween93 = TweenService:Create(TextLabel28, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween93.Completed:Connect(function(playbackState55)
-	end)
-
-	tween93:Play()
-	local tween94 = TweenService:Create(Icon9, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageColor3 = Color3.fromRGB(200, 200, 200) })
-
-	tween94.Completed:Connect(function(playbackState56)
-	end)
-
-	tween94:Play()
-end)
-
-UserInputService.InputBegan:Connect(function(input9, gameProcessed9)
-end)
-
-local Section12 = Instance.new("TextLabel")
-local TextLiner12 = Instance.new("Frame")
-Section12.Name = "Section"
-Section12.Parent = Setting
-Section12.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Section12.BackgroundTransparency = 1
-Section12.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Section12.BorderSizePixel = 0
-Section12.Position = UDim2.new(0.0278450362, 0, 0, 0)
-Section12.Size = UDim2.new(0, 381, 0, 18)
-Section12.Font = Enum.Font.SourceSansBold
-Section12.Text = "Settings"
-Section12.TextColor3 = Color3.fromRGB(255, 255, 255)
-Section12.TextSize = 14
-Section12.TextWrapped = true
-Section12.TextXAlignment = Enum.TextXAlignment.Left
-TextLiner12.Name = "TextLiner"
-TextLiner12.Parent = Section12
-TextLiner12.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-TextLiner12.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLiner12.BorderSizePixel = 0
-TextLiner12.Position = UDim2.new(-0.00499999989, 0, 1, 0)
-TextLiner12.Size = UDim2.new(0, 44, 0, 2)
-local KeyBind = Instance.new("Frame")
-local TextKey = Instance.new("TextLabel")
-local UICK = Instance.new("UICorner")
-local KeyButton = Instance.new("TextButton")
-local UICK1 = Instance.new("UICorner")
-KeyBind.Name = "KeyBind"
-KeyBind.Parent = Setting
-KeyBind.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-KeyBind.BorderColor3 = Color3.fromRGB(0, 0, 0)
-KeyBind.BorderSizePixel = 0
-KeyBind.Position = UDim2.new(0.0314769968, 0, 0, 0)
-KeyBind.Size = UDim2.new(0, 387, 0, 38)
-TextKey.Name = "TextKey"
-TextKey.Parent = KeyBind
-TextKey.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextKey.BackgroundTransparency = 1
-TextKey.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextKey.BorderSizePixel = 0
-TextKey.Position = UDim2.new(0.0232558139, 0, 0.238437057, 0)
-TextKey.Size = UDim2.new(0, 200, 0, 18)
-TextKey.Font = Enum.Font.SourceSansBold
-TextKey.Text = "Toggle UI"
-TextKey.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextKey.TextSize = 14
-TextKey.TextXAlignment = Enum.TextXAlignment.Left
-UICK.CornerRadius = UDim.new(0, 3)
-UICK.Name = "UICK"
-UICK.Parent = KeyBind
-KeyButton.Name = "KeyButton"
-KeyButton.Parent = KeyBind
-KeyButton.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-KeyButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-KeyButton.BorderSizePixel = 0
-KeyButton.Position = UDim2.new(0.818656325, 0, 0.238313377, 0)
-KeyButton.Size = UDim2.new(0, 59, 0, 20)
-KeyButton.AutoButtonColor = false
-KeyButton.Font = Enum.Font.SourceSansBold
-KeyButton.Text = "LeftAlt"
-KeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-KeyButton.TextSize = 12
-UICK1.CornerRadius = UDim.new(0, 3)
-UICK1.Name = "UICK1"
-UICK1.Parent = KeyButton
-
-UserInputService.InputBegan:Connect(function(input10, gameProcessed10)
-end)
-
-KeyButton.MouseButton1Click:Connect(function()
-	KeyButton.Text = "..."
-	task.wait()
-	game.UserInputService.InputEnded:Wait()
-	KeyButton.Text = "Left Alt"
-end)
-
-local Slider = Instance.new("TextButton")
-local UICSlider = Instance.new("UICorner")
-local TextToggle8 = Instance.new("TextLabel")
-local BackSlider = Instance.new("Frame")
-local UICS = Instance.new("UICorner")
-local SliderLine = Instance.new("Frame")
-local UIC18 = Instance.new("UICorner")
-local BoxSlider = Instance.new("TextBox")
-Slider.Name = "Slider"
-Slider.Parent = Setting
-Slider.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Slider.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Slider.BorderSizePixel = 0
-Slider.Position = UDim2.new(0.0314769968, 0, 0, 0)
-Slider.Size = UDim2.new(0, 387, 0, 47)
-Slider.AutoButtonColor = false
-Slider.Font = Enum.Font.SourceSansBold
-Slider.Text = ""
-Slider.TextColor3 = Color3.fromRGB(255, 255, 255)
-Slider.TextSize = 14
-UICSlider.CornerRadius = UDim.new(0, 3)
-UICSlider.Name = "UICSlider"
-UICSlider.Parent = Slider
-TextToggle8.Name = "TextToggle"
-TextToggle8.Parent = Slider
-TextToggle8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle8.BackgroundTransparency = 1
-TextToggle8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle8.BorderSizePixel = 0
-TextToggle8.Position = UDim2.new(0.023, 0, 0.100000001, 0)
-TextToggle8.Size = UDim2.new(0, 200, 0, 18)
-TextToggle8.Font = Enum.Font.SourceSansBold
-TextToggle8.Text = "AutoFarm Speed"
-TextToggle8.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle8.TextSize = 14
-TextToggle8.TextXAlignment = Enum.TextXAlignment.Left
-BackSlider.Name = "BackSlider"
-BackSlider.Parent = Slider
-BackSlider.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackSlider.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackSlider.BorderSizePixel = 0
-BackSlider.Position = UDim2.new(0.0206719916, 0, 0.671212792, 0)
-BackSlider.Size = UDim2.new(0, 369, 0, 6)
-UICS.CornerRadius = UDim.new(1, 3)
-UICS.Name = "UICS"
-UICS.Parent = BackSlider
-SliderLine.Name = "SliderLine"
-SliderLine.Parent = BackSlider
-SliderLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SliderLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
-SliderLine.BorderSizePixel = 0
-SliderLine.Size = UDim2.new(0.894, 0, 1, 0)
-UIC18.CornerRadius = UDim.new(1, 3)
-UIC18.Name = "UIC1"
-UIC18.Parent = SliderLine
-BoxSlider.Name = "BoxSlider"
-BoxSlider.Parent = Slider
-BoxSlider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-BoxSlider.BackgroundTransparency = 1
-BoxSlider.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BoxSlider.BorderSizePixel = 0
-BoxSlider.Position = UDim2.new(0.899, 0, 0.1, 0)
-BoxSlider.Size = UDim2.new(0, 28, 0, 18)
-BoxSlider.Font = Enum.Font.SourceSansBold
-BoxSlider.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
-BoxSlider.Text = "1"
-BoxSlider.TextColor3 = Color3.fromRGB(255, 255, 255)
-BoxSlider.TextSize = 14
-BoxSlider.TextXAlignment = Enum.TextXAlignment.Right
-BoxSlider.Text = "16"
-SliderLine.Size = UDim2.new(0, 0, 1, 0)
-
-Slider.InputBegan:Connect(function(input11, gameProcessed11)
-end)
-
-UserInputService.InputEnded:Connect(function(input12, gameProcessed12)
-end)
-
-UserInputService.InputChanged:Connect(function(input13, gameProcessed13)
-end)
-
-BoxSlider.Focused:Connect(function()
-end)
-
-BoxSlider.FocusLost:Connect(function(enterPressed3, inputObject3)
-end)
-
-local changedSignal14 = BoxSlider:GetPropertyChangedSignal("Text")
-
-changedSignal14:Connect(function()
-end)
-
-local Toggle8 = Instance.new("TextButton")
-local UICToggle8 = Instance.new("UICorner")
-local TextToggle9 = Instance.new("TextLabel")
-local BackToggle8 = Instance.new("Frame")
-local UIC19 = Instance.new("UICorner")
-local InToggle8 = Instance.new("Frame")
-local UIC28 = Instance.new("UICorner")
-Toggle8.Name = "Toggle"
-Toggle8.Parent = Setting
-Toggle8.BackgroundColor3 = Color3.fromRGB(22, 22, 27)
-Toggle8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Toggle8.BorderSizePixel = 0
-Toggle8.Position = UDim2.new(0.0314769968, 0, 0.247619048, 0)
-Toggle8.Size = UDim2.new(0, 387, 0, 33)
-Toggle8.AutoButtonColor = false
-Toggle8.Font = Enum.Font.SourceSansBold
-Toggle8.Text = ""
-Toggle8.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle8.TextSize = 14
-UICToggle8.CornerRadius = UDim.new(0, 3)
-UICToggle8.Name = "UICToggle"
-UICToggle8.Parent = Toggle8
-TextToggle9.Name = "TextToggle"
-TextToggle9.Parent = Toggle8
-TextToggle9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle9.BackgroundTransparency = 1
-TextToggle9.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextToggle9.BorderSizePixel = 0
-TextToggle9.Position = UDim2.new(0.0232558139, 0, 0.212121218, 0)
-TextToggle9.Size = UDim2.new(0, 200, 0, 18)
-TextToggle9.Font = Enum.Font.SourceSansBold
-TextToggle9.Text = "Loop AutoFarm Speed"
-TextToggle9.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextToggle9.TextSize = 14
-TextToggle9.TextXAlignment = Enum.TextXAlignment.Left
-BackToggle8.Name = "BackToggle"
-BackToggle8.Parent = Toggle8
-BackToggle8.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
-BackToggle8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-BackToggle8.BorderSizePixel = 0
-BackToggle8.Position = UDim2.new(0.860465288, 0, 0.212121218, 0)
-BackToggle8.Size = UDim2.new(0, 40, 0, 18)
-UIC19.CornerRadius = UDim.new(1, 3)
-UIC19.Name = "UIC1"
-UIC19.Parent = BackToggle8
-InToggle8.Name = "InToggle"
-InToggle8.Parent = BackToggle8
-InToggle8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-InToggle8.BorderColor3 = Color3.fromRGB(0, 0, 0)
-InToggle8.BorderSizePixel = 0
-InToggle8.Size = UDim2.new(0, 19, 0, 18)
-UIC28.CornerRadius = UDim.new(1, 3)
-UIC28.Name = "UIC2"
-UIC28.Parent = InToggle8
-
-Toggle8.MouseButton1Click:Connect(function()
-	InToggle8:TweenPosition(UDim2.new(0.525, 0, 0, 0), "Out", "Sine", 0.1, false)
-end)
-
-task.spawn(function()
-	local Frame43 = Instance.new("Frame")
-	local MainC3 = Instance.new("UICorner")
-	local TextLabel33 = Instance.new("TextLabel")
-	local UIPadding10 = Instance.new("UIPadding")
-	local TextLabel34 = Instance.new("TextLabel")
-	Frame43.Parent = NotifyHolder
-	Frame43.BackgroundColor3 = Color3.fromRGB(39, 39, 47)
-	Frame43.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Frame43.BorderSizePixel = 0
-	Frame43.BackgroundTransparency = 1
-	Frame43.Position = UDim2.new(-0.0432128906, 0, 0.8125, 0)
-	Frame43.Size = UDim2.new(0, 218, 0, 42)
-	MainC3.CornerRadius = UDim.new(0, 5)
-	MainC3.Name = "MainC"
-	MainC3.Parent = Frame43
-	TextLabel33.Parent = Frame43
-	TextLabel33.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabel33.BackgroundTransparency = 1
-	TextLabel33.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TextLabel33.BorderSizePixel = 0
-	TextLabel33.Size = UDim2.new(0, 186, 0, 24)
-	TextLabel33.Font = Enum.Font.SourceSansBold
-	TextLabel33.Text = "KronHub"
-	TextLabel33.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabel33.TextSize = 14
-	TextLabel33.TextTransparency = 1
-	TextLabel33.TextWrapped = true
-	TextLabel33.TextXAlignment = Enum.TextXAlignment.Left
-	UIPadding10.Parent = Frame43
-	UIPadding10.PaddingLeft = UDim.new(0, 10)
-	TextLabel34.Parent = Frame43
-	TextLabel34.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabel34.BackgroundTransparency = 1
-	TextLabel34.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TextLabel34.BorderSizePixel = 0
-	TextLabel34.Position = UDim2.new(0, 0, 0.428571433, 0)
-	TextLabel34.Size = UDim2.new(0, 186, 0, 24)
-	TextLabel34.Font = Enum.Font.SourceSans
-	TextLabel34.Text = "Welcome back!"
-	TextLabel34.TextTransparency = 1
-	TextLabel34.TextColor3 = Color3.fromRGB(255, 255, 255)
-	TextLabel34.TextSize = 14
-	TextLabel34.TextWrapped = true
-	TextLabel34.TextXAlignment = Enum.TextXAlignment.Left
-	local tween3 = TweenService:Create(TextLabel33, TweenInfo.new(0.5), { TextTransparency = 0 })
-	tween3:Play()
-	local tween4 = TweenService:Create(TextLabel34, TweenInfo.new(0.5), { TextTransparency = 0 })
-	tween4:Play()
-	local tween5 = TweenService:Create(Frame43, TweenInfo.new(0.5), { BackgroundTransparency = 0 })
-	tween5:Play()
-	task.wait(3)
-	local tween7 = TweenService:Create(TextLabel33, TweenInfo.new(0.5), { TextTransparency = 1 })
-	tween7:Play()
-	local tween8 = TweenService:Create(TextLabel34, TweenInfo.new(0.5), { TextTransparency = 1 })
-	tween8:Play()
-	local tween9 = TweenService:Create(Frame43, TweenInfo.new(0.5), { BackgroundTransparency = 1 })
-	tween9:Play()
-	task.wait(0.1)
-	Frame43:Destroy()
-end)
-
-game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-local tween6 = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(2, Enum.EasingStyle.Linear), { CFrame = CFrame.new(Vector3.new(0, 0, 0)) })
-tween6:Play()
-tween6.Completed:Wait()
-
-task.spawn(function()
-	task.wait()
-	task.wait()
-	-- [envlog] the statements above repeat forever (loop)
-end)
-
-task.spawn(function()
-	task.wait()
-	task.wait()
-	-- [envlog] the statements above repeat forever (loop)
-end)
-
-task.spawn(function()
-	task.wait()
-	task.wait()
-	-- [envlog] the statements above repeat forever (loop)
-end)
-
-task.spawn(function()
-	task.wait()
-	task.wait()
-	-- [envlog] the statements above repeat forever (loop)
-end)
-
-local FieldDecos = workspace:FindFirstChild("FieldDecos")
-local children3 = FieldDecos:GetChildren()
-
-for k3, v3 in pairs(children3) do
-	v3.CanCollide = false
-	v3.Transparency = 0.5
+	state.converting = false
+	state.lastConvert = os.clock()
 end
 
-Players.LocalPlayer.Idled:connect(function(idleTime)
-	getgenv().AutoFarmSpeed = true
-	local VirtualInputManager = game:GetService("VirtualInputManager")
-	VirtualInputManager:SendKeyEvent(true, "W", false, game)
-	task.wait()
-	VirtualInputManager:SendKeyEvent(false, "W", false, game)
+local function farmTick()
+	local root, humanoid = getRoot()
+	if not root then
+		setStatus("Waiting for character")
+		return
+	end
+
+	local entry = getField()
+	if not entry then
+		setStatus("Pick a field first")
+		return
+	end
+
+	swing()
+
+	if shouldConvert() then
+		convert()
+		return
+	end
+
+	if CONFIG.collectTokens then
+		local token = nearestToken(root.Position, CONFIG.tokenRadius)
+		if token then
+			if grabToken(token) then
+				setStatus(string.format("Token %d | took one", state.tokens))
+			else
+				setStatus("Going for a token")
+			end
+			return
+		end
+	end
+
+	if not insideField(entry, root.Position, 8) then
+		setStatus("Going to " .. entry.name)
+		relocate(fieldPoint(entry), 60)
+		state.waypointAt = os.clock()
+		return
+	end
+
+	local waypoint = fieldPoint(entry)
+	if (root.Position - waypoint).Magnitude <= CONFIG.arriveRadius or os.clock() - state.waypointAt > CONFIG.waypointTimeout then
+		state.ring = state.ring + 1
+		state.waypointAt = os.clock()
+		waypoint = fieldPoint(entry)
+	end
+
+	if os.clock() - state.moveAt > 0.25 then
+		state.moveAt = os.clock()
+		humanoid:MoveTo(waypoint)
+	end
+
+	local pollen, capacity = getPollen()
+	if pollen and capacity then
+		setStatus(string.format("%s | pollen %d/%d | tokens %d", entry.name, pollen, capacity, state.tokens))
+	else
+		setStatus(string.format("%s | tokens %d", entry.name, state.tokens))
+	end
+end
+
+local function runLoop()
+	while state.alive do
+		if CONFIG.autoFarm then
+			local ok, err = pcall(farmTick)
+			if not ok then
+				warn("[KronHub] " .. tostring(err))
+				task.wait(0.5)
+			end
+			task.wait(CONFIG.tickDelay)
+		else
+			task.wait(0.15)
+		end
+	end
+end
+
+-- UI
+
+local function corner(instance, radius)
+	Instance.new("UICorner", instance).CornerRadius = UDim.new(0, radius)
+end
+
+local function makeButton(parent, text, order, callback, height)
+	local button = Instance.new("TextButton")
+	button.Size = UDim2.new(0, 392, 0, height or 33)
+	button.BackgroundColor3 = COLORS.row
+	button.BorderSizePixel = 0
+	button.AutoButtonColor = false
+	button.Font = Enum.Font.SourceSansBold
+	button.Text = text
+	button.TextColor3 = COLORS.text
+	button.TextSize = 14
+	button.TextXAlignment = Enum.TextXAlignment.Left
+	button.LayoutOrder = order
+	button.Parent = parent
+	corner(button, 3)
+
+	local padding = Instance.new("UIPadding", button)
+	padding.PaddingLeft = UDim.new(0, 10)
+
+	button.MouseButton1Click:Connect(function()
+		if callback then
+			local ok, err = pcall(callback, button)
+			if not ok then
+				warn("[KronHub] " .. tostring(err))
+			end
+		end
+	end)
+
+	return button
+end
+
+local function makeToggle(parent, text, order, get, set)
+	local row = makeButton(parent, "", order, nil)
+
+	local label = Instance.new("TextLabel")
+	label.Size = UDim2.new(1, -80, 1, 0)
+	label.BackgroundTransparency = 1
+	label.Font = Enum.Font.SourceSansBold
+	label.Text = text
+	label.TextColor3 = COLORS.text
+	label.TextSize = 14
+	label.TextXAlignment = Enum.TextXAlignment.Left
+	label.Parent = row
+
+	local back = Instance.new("Frame")
+	back.Size = UDim2.fromOffset(40, 18)
+	back.Position = UDim2.new(1, -50, 0.5, -9)
+	back.BackgroundColor3 = COLORS.panel
+	back.BorderSizePixel = 0
+	back.Parent = row
+	corner(back, 9)
+
+	local knob = Instance.new("Frame")
+	knob.Size = UDim2.fromOffset(18, 18)
+	knob.Position = UDim2.new(0, 1, 0, 0)
+	knob.BackgroundColor3 = COLORS.dim
+	knob.BorderSizePixel = 0
+	knob.Parent = back
+	corner(knob, 9)
+
+	local function paint(animate)
+		local on = get()
+		local target = on and UDim2.new(1, -19, 0, 0) or UDim2.new(0, 1, 0, 0)
+		if animate then
+			TweenService:Create(knob, TweenInfo.new(0.12), { Position = target }):Play()
+			TweenService:Create(knob, TweenInfo.new(0.12), { BackgroundColor3 = on and COLORS.accent or COLORS.dim }):Play()
+		else
+			knob.Position = target
+			knob.BackgroundColor3 = on and COLORS.accent or COLORS.dim
+		end
+	end
+
+	row.MouseButton1Click:Connect(function()
+		set(not get())
+		paint(true)
+	end)
+
+	paint(false)
+	return row
+end
+
+local function makeDropdown(parent, order, placeholder, getValues, onSelect)
+	local button = makeButton(parent, placeholder, order, nil)
+
+	local arrow = Instance.new("TextLabel")
+	arrow.Size = UDim2.new(0, 30, 1, 0)
+	arrow.Position = UDim2.new(1, -34, 0, 0)
+	arrow.BackgroundTransparency = 1
+	arrow.Font = Enum.Font.SourceSansBold
+	arrow.Text = "v"
+	arrow.TextColor3 = COLORS.dim
+	arrow.TextSize = 13
+	arrow.Parent = button
+
+	local holder = Instance.new("Frame")
+	holder.Size = UDim2.new(0, 392, 0, 0)
+	holder.BackgroundColor3 = COLORS.main
+	holder.BorderSizePixel = 0
+	holder.ClipsDescendants = true
+	holder.LayoutOrder = order + 1
+	holder.Parent = parent
+	corner(holder, 3)
+
+	local scroll = Instance.new("ScrollingFrame")
+	scroll.Size = UDim2.new(1, -4, 1, -4)
+	scroll.Position = UDim2.fromOffset(2, 2)
+	scroll.BackgroundTransparency = 1
+	scroll.BorderSizePixel = 0
+	scroll.ScrollBarThickness = 2
+	scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+	scroll.Parent = holder
+
+	local layout = Instance.new("UIListLayout")
+	layout.Padding = UDim.new(0, 4)
+	layout.SortOrder = Enum.SortOrder.LayoutOrder
+	layout.Parent = scroll
+	layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+		scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 4)
+	end)
+
+	local open = false
+
+	local function setOpen(value)
+		open = value
+		holder.Size = UDim2.new(0, 392, 0, value and 160 or 0)
+		arrow.Text = value and "^" or "v"
+	end
+
+	button.MouseButton1Click:Connect(function()
+		local values = getValues()
+		for _, child in ipairs(scroll:GetChildren()) do
+			if child:IsA("TextButton") then
+				child:Destroy()
+			end
+		end
+
+		if #values == 0 then
+			button.Text = "No fields found"
+			setOpen(false)
+			return
+		end
+
+		for index, value in ipairs(values) do
+			local option = Instance.new("TextButton")
+			option.Size = UDim2.new(1, -4, 0, 28)
+			option.BackgroundColor3 = COLORS.row
+			option.BorderSizePixel = 0
+			option.AutoButtonColor = false
+			option.Font = Enum.Font.SourceSans
+			option.Text = "  " .. (value:gsub("_", " "))
+			option.TextColor3 = COLORS.text
+			option.TextSize = 13
+			option.TextXAlignment = Enum.TextXAlignment.Left
+			option.LayoutOrder = index
+			option.Parent = scroll
+			corner(option, 2)
+
+			option.MouseButton1Click:Connect(function()
+				onSelect(value)
+				setOpen(false)
+			end)
+		end
+
+		setOpen(not open)
+	end)
+
+	return {
+		button = button,
+		close = function()
+			setOpen(false)
+		end,
+	}
+end
+
+local function makeSection(parent, text, order)
+	local label = Instance.new("TextLabel")
+	label.Size = UDim2.new(0, 392, 0, 20)
+	label.BackgroundTransparency = 1
+	label.Font = Enum.Font.SourceSansBold
+	label.Text = text
+	label.TextColor3 = COLORS.text
+	label.TextSize = 14
+	label.TextXAlignment = Enum.TextXAlignment.Left
+	label.LayoutOrder = order
+	label.Parent = parent
+
+	local line = Instance.new("Frame")
+	line.Size = UDim2.new(0, 44, 0, 2)
+	line.Position = UDim2.new(0, 0, 1, -2)
+	line.BackgroundColor3 = COLORS.main
+	line.BorderSizePixel = 0
+	line.Parent = label
+
+	return label
+end
+
+local pages = {}
+
+local KronHub = {}
+
+local function makePage(content, name)
+	local page = Instance.new("ScrollingFrame")
+	page.Name = name
+	page.Size = UDim2.new(1, 0, 1, 0)
+	page.BackgroundTransparency = 1
+	page.BorderSizePixel = 0
+	page.ScrollBarThickness = 2
+	page.ScrollBarImageColor3 = COLORS.accent
+	page.CanvasSize = UDim2.new(0, 0, 0, 0)
+	page.Visible = false
+	page.Parent = content
+
+	local layout = Instance.new("UIListLayout")
+	layout.Padding = UDim.new(0, 6)
+	layout.SortOrder = Enum.SortOrder.LayoutOrder
+	layout.Parent = page
+	layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+		page.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 8)
+	end)
+
+	pages[name] = page
+	return page
+end
+
+local function setField(name)
+	CONFIG.field = name
+	for _, label in ipairs(gui.fieldDisplays) do
+		if label.Parent then
+			label.Text = "Field: " .. (name:gsub("_", " "))
+		end
+	end
+	setStatus("Field: " .. (name:gsub("_", " ")))
+end
+
+local function buildGui()
+	state.fields = scanFields()
+
+	local parent = (gethui and gethui()) or CoreGui
+	local old = parent:FindFirstChild("KronHub")
+	if old then
+		old:Destroy()
+	end
+
+	local screenGui = Instance.new("ScreenGui")
+	screenGui.Name = "KronHub"
+	screenGui.ResetOnSpawn = false
+	screenGui.DisplayOrder = 999
+	screenGui.Parent = parent
+	gui.screenGui = screenGui
+
+	local main = Instance.new("Frame")
+	main.Size = UDim2.fromOffset(554, 339)
+	main.Position = UDim2.new(0.5, -277, 0.5, -170)
+	main.BackgroundColor3 = COLORS.main
+	main.BorderSizePixel = 0
+	main.Parent = screenGui
+	corner(main, 5)
+	gui.main = main
+
+	local sidebar = Instance.new("Frame")
+	sidebar.Size = UDim2.fromOffset(120, 339)
+	sidebar.BackgroundColor3 = COLORS.panel
+	sidebar.BorderSizePixel = 0
+	sidebar.Parent = main
+	corner(sidebar, 5)
+
+	local logo = Instance.new("TextLabel")
+	logo.Size = UDim2.new(1, 0, 0, 56)
+	logo.BackgroundTransparency = 1
+	logo.Font = Enum.Font.SourceSansBold
+	logo.Text = "KronHub"
+	logo.TextColor3 = COLORS.accent
+	logo.TextSize = 18
+	logo.Parent = sidebar
+	gui.dragHandle = logo
+
+	local tabHolder = Instance.new("Frame")
+	tabHolder.Size = UDim2.new(1, -16, 1, -66)
+	tabHolder.Position = UDim2.fromOffset(8, 60)
+	tabHolder.BackgroundTransparency = 1
+	tabHolder.Parent = sidebar
+
+	local tabLayout = Instance.new("UIListLayout")
+	tabLayout.Padding = UDim.new(0, 6)
+	tabLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	tabLayout.Parent = tabHolder
+
+	local content = Instance.new("Frame")
+	content.Size = UDim2.fromOffset(414, 288)
+	content.Position = UDim2.fromOffset(130, 8)
+	content.BackgroundTransparency = 1
+	content.Parent = main
+	gui.content = content
+
+	local status = Instance.new("TextLabel")
+	status.Size = UDim2.fromOffset(414, 26)
+	status.Position = UDim2.fromOffset(130, 304)
+	status.BackgroundTransparency = 1
+	status.Font = Enum.Font.SourceSans
+	status.Text = "Pick a field, then enable Auto Farm."
+	status.TextColor3 = COLORS.dim
+	status.TextSize = 13
+	status.TextXAlignment = Enum.TextXAlignment.Left
+	status.Parent = main
+	gui.status = status
+
+	local tabButtons = {}
+
+	local function showPage(name)
+		for pageName, page in pairs(pages) do
+			page.Visible = pageName == name
+		end
+		for buttonName, button in pairs(tabButtons) do
+			button.TextColor3 = buttonName == name and COLORS.accent or COLORS.dim
+		end
+	end
+
+	local function addTab(name, order)
+		local button = Instance.new("TextButton")
+		button.Size = UDim2.new(1, 0, 0, 32)
+		button.BackgroundColor3 = COLORS.main
+		button.BorderSizePixel = 0
+		button.AutoButtonColor = false
+		button.Font = Enum.Font.SourceSansBold
+		button.Text = name
+		button.TextColor3 = COLORS.dim
+		button.TextSize = 14
+		button.LayoutOrder = order
+		button.Parent = tabHolder
+		corner(button, 3)
+		button.MouseButton1Click:Connect(function()
+			showPage(name)
+		end)
+		tabButtons[name] = button
+	end
+
+	local home = makePage(content, "Home")
+	local farming = makePage(content, "Farming")
+	local teleport = makePage(content, "Teleport")
+	local items = makePage(content, "Items")
+
+	addTab("Home", 1)
+	addTab("Farming", 2)
+	addTab("Teleport", 3)
+	addTab("Items", 4)
+
+	-- Home
+	makeSection(home, "KronHub rebuild - farming edition", 10)
+	makeButton(home, "Rejoin Server", 30, function()
+		TeleportService:Teleport(game.PlaceId, player)
+	end)
+	makeButton(home, "Refresh Fields", 40, function()
+		state.fields = scanFields()
+		setStatus(string.format("%d fields found", #fieldOptions()))
+	end)
+	makeButton(home, "Unload", 50, function()
+		KronHub.stop()
+	end)
+
+	-- Farming
+	makeSection(farming, "Farming", 10)
+
+	local farmDropdown = makeDropdown(farming, 20, "Field: " .. (CONFIG.field:gsub("_", " ")), fieldOptions, setField)
+	table.insert(gui.fieldDisplays, farmDropdown.button)
+
+	makeToggle(farming, "Auto Farm", 30, function()
+		return CONFIG.autoFarm
+	end, function(value)
+		CONFIG.autoFarm = value
+		setStatus(value and "Auto farm on" or "Auto farm off")
+	end)
+
+	makeToggle(farming, "Collect Tokens (near only)", 40, function()
+		return CONFIG.collectTokens
+	end, function(value)
+		CONFIG.collectTokens = value
+	end)
+
+	makeToggle(farming, "Auto Convert At Hive", 50, function()
+		return CONFIG.autoConvert
+	end, function(value)
+		CONFIG.autoConvert = value
+	end)
+
+	makeButton(farming, "Token Mode: " .. CONFIG.tokenMode, 60, function(button)
+		CONFIG.tokenMode = CONFIG.tokenMode == "Walk" and "Teleport" or "Walk"
+		button.Text = "Token Mode: " .. CONFIG.tokenMode
+	end)
+
+	makeButton(farming, "Convert Now", 70, function()
+		task.spawn(convert)
+	end)
+
+	-- Teleport
+	makeSection(teleport, "Locations", 10)
+
+	local teleportDropdown = makeDropdown(teleport, 20, "Field: " .. (CONFIG.field:gsub("_", " ")), fieldOptions, setField)
+	table.insert(gui.fieldDisplays, teleportDropdown.button)
+
+	makeButton(teleport, "Teleport To Field", 30, function()
+		local entry = getField()
+		if not entry then
+			setStatus("Pick a field first")
+			return
+		end
+		local ok = relocate(fieldPoint(entry), 60)
+		setStatus(ok and ("Teleported to " .. entry.name) or "Teleport failed")
+	end)
+
+	makeSection(teleport, "Your Hive", 40)
+	makeButton(teleport, "Teleport To Hive", 50, function()
+		local position = hivePosition()
+		if not position then
+			setStatus("No hive found")
+			return
+		end
+		relocate(position + Vector3.new(0, 3, 0), 60)
+	end)
+
+	makeButton(teleport, "Set Hive From Here", 60, function()
+		local root = getRoot()
+		if not root then
+			setStatus("No character")
+			return
+		end
+		state.hiveOverride = root.Position
+		setStatus("Hive position saved")
+	end)
+
+	-- Items
+	makeSection(items, "Buffs", 10)
+	makeButton(items, "Use All Buffs (Blue)", 20, function()
+		for _, name in ipairs({ "Blue Extract", "Glitter", "Glue", "Oil", "Enzymes", "Tropical Drink" }) do
+			fireEvent("PlayerActivesCommand", { Name = name })
+			task.wait(0.05)
+		end
+	end)
+	makeButton(items, "Use All Buffs (Red)", 30, function()
+		for _, name in ipairs({ "Red Extract", "Glitter", "Glue", "Oil", "Enzymes", "Tropical Drink" }) do
+			fireEvent("PlayerActivesCommand", { Name = name })
+			task.wait(0.05)
+		end
+	end)
+
+	for index, name in ipairs(BUFFS) do
+		makeButton(items, "Use " .. name, 40 + index, function()
+			fireEvent("PlayerActivesCommand", { Name = name })
+			setStatus("Used " .. name)
+		end)
+	end
+
+	makeSection(items, "Dispensers", 100)
+	makeButton(items, "Use All Dispensers", 110, function()
+		for _, name in ipairs(DISPENSERS) do
+			fireEvent("ToyEvent", name)
+			task.wait(0.05)
+		end
+	end)
+
+	showPage("Farming")
+
+	-- Dragging
+	local dragging, dragStart, startPosition = false, nil, nil
+
+	track(logo.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging, dragStart, startPosition = true, input.Position, main.Position
+		end
+	end))
+
+	track(UserInputService.InputChanged:Connect(function(input)
+		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+			local delta = input.Position - dragStart
+			main.Position = UDim2.new(
+				startPosition.X.Scale,
+				startPosition.X.Offset + delta.X,
+				startPosition.Y.Scale,
+				startPosition.Y.Offset + delta.Y
+			)
+		end
+	end))
+
+	track(UserInputService.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = false
+		end
+	end))
+end
+
+function KronHub.start()
+	if getgenv and getgenv().KronHub then
+		local previous = getgenv().KronHub
+		if previous ~= KronHub and previous.stop then
+			pcall(previous.stop)
+		end
+	end
+
+	if getgenv then
+		getgenv().KronHub = KronHub
+	end
+
+	buildGui()
+
+	local function onCharacter(character)
+		local humanoid = character:WaitForChild("Humanoid")
+		pcall(function()
+			humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+			humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+		end)
+	end
+
+	onCharacter(player.Character or player.CharacterAdded:Wait())
+	track(player.CharacterAdded:Connect(onCharacter))
+
+	track(player.Idled:Connect(function()
+		pcall(function()
+			VirtualUser:CaptureController()
+			VirtualUser:ClickButton2(Vector2.new())
+		end)
+	end))
+
+	task.spawn(runLoop)
+end
+
+function KronHub.stop()
+	state.alive = false
+	state.converting = false
+	CONFIG.autoFarm = false
+
+	for _, connection in ipairs(connections) do
+		pcall(function()
+			connection:Disconnect()
+		end)
+	end
+	table.clear(connections)
+
+	if gui.screenGui then
+		gui.screenGui:Destroy()
+		gui.screenGui = nil
+	end
+
+	if getgenv and getgenv().KronHub == KronHub then
+		getgenv().KronHub = nil
+	end
+end
+
+KronHub.config = CONFIG
+KronHub.state = state
+
+local ok, err = xpcall(KronHub.start, function(message)
+	return tostring(message) .. "\n" .. debug.traceback()
 end)
+
+if not ok then
+	warn("[KronHub] " .. tostring(err))
+	KronHub.stop()
+end
